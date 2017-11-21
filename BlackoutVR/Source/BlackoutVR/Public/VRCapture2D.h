@@ -14,6 +14,7 @@ class BLACKOUTVR_API AVRCapture2D : public ASceneCapture2D
 {
 	GENERATED_BODY()
 
+public:
 	UFUNCTION(BlueprintCallable, Category="Screen")
 	void ScreenToSieWorld(FVector2D touchPosition, FVector& worldLocation, FVector& worldDirection);
 	
