@@ -78,4 +78,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
 	void RemoveTouchFromArray(ETouchIndex::Type fingerIndex);
+
+	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
+	AActor* GetTouchedActor(ETouchIndex::Type fingerIndex);
+
+	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
+	void SetTouchedActorMovementLocation(ETouchIndex::Type fingerIndex, FVector hitLocation);
 };

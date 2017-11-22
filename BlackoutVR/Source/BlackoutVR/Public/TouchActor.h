@@ -22,6 +22,9 @@ class BLACKOUTVR_API ITouchActor
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 	
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Movement")
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Movement")
 		void SetMoveActorLocation(FVector moveLocation);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Movement")
+		void StopActorMovement();
 };

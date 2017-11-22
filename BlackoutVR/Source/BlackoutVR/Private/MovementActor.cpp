@@ -27,13 +27,16 @@ void AMovementActor::Tick(float DeltaTime)
 		FVector locationCache = GetActorLocation();
 
 		// Check if destination reached
-		if (desiredPoint == locationCache)
+		if (desiredPoint.Equals(locationCache, 5.0f))
 		{
 			StopMovement();
 		}
 		else {
 			// Calculate lerp movement, with speed as strength
-			FVector lerp = FMath::Lerp(locationCache, desiredPoint, speed * DeltaTime);
+			FVector temp = (desiredPoint - locationCache);
+			temp.Normalize(1.0f);
+			FVector angleLoc = temp + locationCache;
+			FVector lerp = FMath::Lerp(locationCache, angleLoc, speed * DeltaTime);
 
 			FHitResult HitResult;
 			if (SetActorLocation(lerp, true, &HitResult) == false)
@@ -51,11 +54,10 @@ void AMovementActor::Tick(float DeltaTime)
 }
 
 // Moves to a location through lerping
-void AMovementActor::MoveToLocation(FVector point, float speed)
+void AMovementActor::MoveToLocation(FVector point)
 {
 	AMovementActor::desiredPoint = point; // set the desired end point
 	AMovementActor::desiredPoint.Z = GetActorLocation().Z; // Do not lerp into the air or below the ground
-	AMovementActor::speed = speed; // set the desired speed
 	AMovementActor::moving = true; // start moving
 }
 
@@ -63,7 +65,16 @@ void AMovementActor::MoveToLocation(FVector point, float speed)
 void AMovementActor::StopMovement()
 {
 	AMovementActor::desiredPoint = GetActorLocation(); // set the desired end point
-	AMovementActor::speed = 0.0f; // set the desired speed
 	AMovementActor::moving = false; // stop moving
+}
+
+void AMovementActor::SetMoveActorLocation_Implementation(FVector moveLocation)
+{
+	MoveToLocation(moveLocation);
+}
+
+void AMovementActor::StopActorMovement_Implementation()
+{
+	StopMovement();
 }
 

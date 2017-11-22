@@ -55,13 +55,32 @@ void ABlackoutVRCharacter::TouchEnter(ETouchIndex::Type fingerIndex, FVector tou
 
 void ABlackoutVRCharacter::TouchMoved(ETouchIndex::Type fingerIndex, FVector touchLocation)
 {
-	//FHitResult hit;
-	//TouchTrace(FVector2D(touchLocation.X, touchLocation.Y), hit);
-	//UE_LOG(LogTemp, Log, TEXT("Moved my trallala: %s"), *hit.Location.ToString())
+	if(!HasTouchedActor(fingerIndex))
+	{
+		return;
+	}
+
+	FHitResult hit;
+	if(TouchTrace(FVector2D(touchLocation.X, touchLocation.Y), hit))
+	{
+		SetTouchedActorMovementLocation(fingerIndex, hit.Location);
+	}
 }
 
 void ABlackoutVRCharacter::TouchExit(ETouchIndex::Type fingerIndex, FVector touchLocation)
 {
+	if (!HasTouchedActor(fingerIndex))
+	{
+		return;
+	}
+
+	AActor* touchedActor = GetTouchedActor(fingerIndex);
+	if(touchedActor)
+	{
+		ITouchActor::Execute_StopActorMovement(touchedActor);
+	}
+
+
 	UE_LOG(LogTemp, Log, TEXT("After my trallala: %s"), *FString::FromInt(touchStructs.Num()));
 	RemoveTouchFromArray(fingerIndex);
 	UE_LOG(LogTemp, Log, TEXT("Removed my trallala: %s"), *FString::FromInt(touchStructs.Num()));
@@ -78,13 +97,19 @@ bool ABlackoutVRCharacter::CheckIfTouchedActor(FVector2D touchLocation, FVector&
 			actor = hit.GetActor();
 			return true;
 		}
-
 	}
 	return false;
 }
 
 bool ABlackoutVRCharacter::HasTouchedActor(ETouchIndex::Type fingerIndex)
 {
+	for(FFingerTouch touchStruct : touchStructs)
+	{
+		if(touchStruct.fingerIndex == fingerIndex)
+		{
+			return true;
+		}
+	}
 	return false;
 }
 
@@ -113,6 +138,33 @@ void ABlackoutVRCharacter::RemoveTouchFromArray(ETouchIndex::Type fingerIndex)
 		{
 			touchStructs.RemoveAt(i);
 			return;
+		}
+	}
+}
+
+AActor * ABlackoutVRCharacter::GetTouchedActor(ETouchIndex::Type fingerIndex)
+{
+	for(FFingerTouch touchStruct : touchStructs)
+	{
+		if(touchStruct.fingerIndex == fingerIndex)
+		{
+			return touchStruct.touchedActor;
+		}
+	}
+	return nullptr;
+}
+
+void ABlackoutVRCharacter::SetTouchedActorMovementLocation(ETouchIndex::Type fingerIndex, FVector hitLocation)
+{
+	for(FFingerTouch touchStruct : touchStructs)
+	{
+		if(touchStruct.fingerIndex == fingerIndex)
+		{
+			touchStruct.lastTouchedPosition = hitLocation;
+			if(touchStruct.touchedActor)
+			{
+				ITouchActor::Execute_SetMoveActorLocation(touchStruct.touchedActor, hitLocation);
+			}
 		}
 	}
 }
