@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BlackoutVRCharacter.h"
+#include <string>
 
 
 ABlackoutVRCharacter::ABlackoutVRCharacter()
@@ -39,23 +40,81 @@ AVRCapture2D* ABlackoutVRCharacter::GetSpectatorCam()
 
 void ABlackoutVRCharacter::TouchEnter(ETouchIndex::Type fingerIndex, FVector touchLocation)
 {
-	FHitResult hit;
-	TouchTrace(FVector2D(touchLocation.X, touchLocation.Y), hit);
-	UE_LOG(LogTemp, Log, TEXT("Touched my trallala: %s"), *hit.Location.ToString())
+	AActor* actor;
+	FVector hitLocation;
+	if (CheckIfTouchedActor(FVector2D(touchLocation.X, touchLocation.Y), hitLocation, actor))
+	{
+		if (!CheckActorBeenTouched(actor))
+		{
+			AddFingerTouchToArray(fingerIndex, hitLocation, actor);
+			UE_LOG(LogTemp, Log, TEXT("Touched my trallala: %s"), *hitLocation.ToString())
+		}
+	}
+	UE_LOG(LogTemp, Log, TEXT("After my trallala"))
 }
 
 void ABlackoutVRCharacter::TouchMoved(ETouchIndex::Type fingerIndex, FVector touchLocation)
 {
-	FHitResult hit;
-	TouchTrace(FVector2D(touchLocation.X, touchLocation.Y), hit);
-	UE_LOG(LogTemp, Log, TEXT("Moved my trallala: %s"), *hit.Location.ToString())
+	//FHitResult hit;
+	//TouchTrace(FVector2D(touchLocation.X, touchLocation.Y), hit);
+	//UE_LOG(LogTemp, Log, TEXT("Moved my trallala: %s"), *hit.Location.ToString())
 }
 
 void ABlackoutVRCharacter::TouchExit(ETouchIndex::Type fingerIndex, FVector touchLocation)
 {
+	UE_LOG(LogTemp, Log, TEXT("After my trallala: %s"), *FString::FromInt(touchStructs.Num()));
+	RemoveTouchFromArray(fingerIndex);
+	UE_LOG(LogTemp, Log, TEXT("Removed my trallala: %s"), *FString::FromInt(touchStructs.Num()));
+}
+
+bool ABlackoutVRCharacter::CheckIfTouchedActor(FVector2D touchLocation, FVector& hitLocation, AActor*& actor)
+{
 	FHitResult hit;
-	TouchTrace(FVector2D(touchLocation.X, touchLocation.Y), hit);
-	UE_LOG(LogTemp, Log, TEXT("Pulled my trallala: %s"), *hit.Location.ToString())
+	if (TouchTrace(touchLocation, hit))
+	{
+		if (hit.GetActor() && hit.GetActor()->GetClass()->ImplementsInterface(UTouchActor::StaticClass()))
+		{
+			hitLocation = hit.Location;
+			actor = hit.GetActor();
+			return true;
+		}
+
+	}
+	return false;
+}
+
+bool ABlackoutVRCharacter::HasTouchedActor(ETouchIndex::Type fingerIndex)
+{
+	return false;
+}
+
+bool ABlackoutVRCharacter::CheckActorBeenTouched(AActor* actor)
+{
+	for (FFingerTouch touchstruct : touchStructs)
+	{
+		if (touchstruct.touchedActor == actor)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void ABlackoutVRCharacter::AddFingerTouchToArray(ETouchIndex::Type fingerIndex, FVector hitLocation, AActor* actor)
+{
+	touchStructs.Add(FFingerTouch(fingerIndex, hitLocation, actor));
+}
+
+void ABlackoutVRCharacter::RemoveTouchFromArray(ETouchIndex::Type fingerIndex)
+{
+	for (int i = 0; i < touchStructs.Num(); i++)
+	{
+		if (touchStructs[i].fingerIndex == fingerIndex)
+		{
+			touchStructs.RemoveAt(i);
+			return;
+		}
+	}
 }
 
 bool ABlackoutVRCharacter::TouchTrace(FVector2D touchLocation, FHitResult& hit)
@@ -63,6 +122,7 @@ bool ABlackoutVRCharacter::TouchTrace(FVector2D touchLocation, FHitResult& hit)
 	FVector worldLocation;
 	FVector worldDirection;
 	AVRCapture2D* spec = GetSpectatorCam();
+
 	if (spec)
 	{
 		spec->ScreenToSieWorld(touchLocation, worldLocation, worldDirection);
@@ -72,7 +132,6 @@ bool ABlackoutVRCharacter::TouchTrace(FVector2D touchLocation, FHitResult& hit)
 	const FRotator rot(0, 270, 0);
 	FVector traceRot = rot.RotateVector(worldLocation);
 	FVector traceEnd = spec->GetActorLocation() - (FVector((((traceRot.X * -1) / raySpread) + rayOffset), traceRot.Y, traceRot.Z) * rayDistance);
-
 
 	FCollisionQueryParams params;
 	params.AddIgnoredActor(this);

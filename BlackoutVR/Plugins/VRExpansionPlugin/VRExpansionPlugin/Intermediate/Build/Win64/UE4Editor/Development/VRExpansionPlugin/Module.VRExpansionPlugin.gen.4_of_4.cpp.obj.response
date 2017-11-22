@@ -23,16 +23,16 @@
 /wd4838
 /w44668
 /I "C:\Program Files\Epic Games\UE_4.17\Engine\Source"
-/I C:\Users\GD&T\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Source\VRExpansionPlugin\Private
-/I C:\Users\GD&T\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Source\VRExpansionPlugin\Private\SimpleChar
+/I C:\Users\eNVERS\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Source\VRExpansionPlugin\Private
+/I C:\Users\eNVERS\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Source\VRExpansionPlugin\Private\SimpleChar
 /I "C:\Program Files\Epic Games\UE_4.17\Engine\Source\Runtime\Engine\Private\PhysicsEngine"
-/I C:\Users\GD&T\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Source
-/I C:\Users\GD&T\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Source\VRExpansionPlugin\Public
-/I C:\Users\GD&T\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Source\VRExpansionPlugin\Public\Interactibles
-/I C:\Users\GD&T\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Source\VRExpansionPlugin\Public\Misc
-/I C:\Users\GD&T\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Source\VRExpansionPlugin\Public\SimpleChar
-/I C:\Users\GD&T\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Intermediate\Build\Win64\UE4Editor\Inc\VRExpansionPlugin
-/I C:\Users\GD&T\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Source\VRExpansionPlugin
+/I C:\Users\eNVERS\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Source
+/I C:\Users\eNVERS\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Source\VRExpansionPlugin\Public
+/I C:\Users\eNVERS\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Source\VRExpansionPlugin\Public\Interactibles
+/I C:\Users\eNVERS\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Source\VRExpansionPlugin\Public\Misc
+/I C:\Users\eNVERS\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Source\VRExpansionPlugin\Public\SimpleChar
+/I C:\Users\eNVERS\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Intermediate\Build\Win64\UE4Editor\Inc\VRExpansionPlugin
+/I C:\Users\eNVERS\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Source\VRExpansionPlugin
 /I "C:\Program Files\Epic Games\UE_4.17\Engine\Source\Runtime\Core\Public"
 /I "C:\Program Files\Epic Games\UE_4.17\Engine\Source\Runtime\Core\Public\Internationalization"
 /I "C:\Program Files\Epic Games\UE_4.17\Engine\Source\Runtime\Core\Public\Async"
@@ -401,9 +401,9 @@
 /FI"C:\Program Files\Epic Games\UE_4.17\Engine\Intermediate\Build\Win64\UE4Editor\Development\UnrealEd\SharedPCH.UnrealEd.h"
 /Yu"C:\Program Files\Epic Games\UE_4.17\Engine\Intermediate\Build\Win64\UE4Editor\Development\UnrealEd\SharedPCH.UnrealEd.h"
 /Fp"C:\Program Files\Epic Games\UE_4.17\Engine\Intermediate\Build\Win64\UE4Editor\Development\UnrealEd\SharedPCH.UnrealEd.h.pch"
-"C:\Users\GD&T\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Intermediate\Build\Win64\UE4Editor\Development\VRExpansionPlugin\Module.VRExpansionPlugin.gen.4_of_4.cpp"
-/FI"C:\Users\GD&T\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Intermediate\Build\Win64\UE4Editor\Development\VRExpansionPlugin\Definitions.VRExpansionPlugin.h"
-/Fo"C:\Users\GD&T\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Intermediate\Build\Win64\UE4Editor\Development\VRExpansionPlugin\Module.VRExpansionPlugin.gen.4_of_4.cpp.obj"
+"C:\Users\eNVERS\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Intermediate\Build\Win64\UE4Editor\Development\VRExpansionPlugin\Module.VRExpansionPlugin.gen.4_of_4.cpp"
+/FI"C:\Users\eNVERS\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Intermediate\Build\Win64\UE4Editor\Development\VRExpansionPlugin\Definitions.VRExpansionPlugin.h"
+/Fo"C:\Users\eNVERS\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\VRExpansionPlugin\VRExpansionPlugin\Intermediate\Build\Win64\UE4Editor\Development\VRExpansionPlugin\Module.VRExpansionPlugin.gen.4_of_4.cpp.obj"
 /TP
 /GR-
 /W4

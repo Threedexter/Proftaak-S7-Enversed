@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "SimpleChar/VRSimpleCharacter.h"
 #include "VRCapture2D.h"
+#include "TouchActor.h"
+#include "FFingerTouch.h"
 #include "BlackoutVRCharacter.generated.h"
 
 /**
@@ -24,6 +26,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Touch|Ray")
 		float rayDistance = 10000.f;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Touch|Actors")
+		TArray<FFingerTouch> touchStructs;
 
 private:
 		AVRCapture2D* currentSpecCam;
@@ -56,5 +61,21 @@ public:
 	void TouchMoved(ETouchIndex::Type fingerIndex, FVector touchLocation);
 	void TouchExit(ETouchIndex::Type fingerIndex, FVector touchLocation);
 
+	UFUNCTION(BlueprintCallable, Category="Touch|Trace")
 	bool TouchTrace(FVector2D touchLocation, FHitResult& hit);
+
+	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
+	bool CheckIfTouchedActor(FVector2D touchLocation, FVector& hitLocation, AActor*& actor);
+
+	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
+	bool HasTouchedActor(ETouchIndex::Type fingerIndex);
+
+	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
+	bool CheckActorBeenTouched(AActor* actor);
+
+	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
+	void AddFingerTouchToArray(ETouchIndex::Type fingerIndex, FVector hitLocation, AActor* actor);
+
+	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
+	void RemoveTouchFromArray(ETouchIndex::Type fingerIndex);
 };
