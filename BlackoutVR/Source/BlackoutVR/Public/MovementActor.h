@@ -5,16 +5,20 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "TouchActor.h"
+#include "Components/BoxComponent.h"
 #include "MovementActor.generated.h"
 
 UCLASS()
 class BLACKOUTVR_API AMovementActor : public AActor, public ITouchActor
 {
-	GENERATED_BODY()
+GENERATED_BODY()
 	
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category="Movement")
 	float speed = 1.0f;
+
+	UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UBoxComponent* collisionBox;
 
 public:	
 	// Sets default values for this actor's properties

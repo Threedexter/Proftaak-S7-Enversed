@@ -8,7 +8,16 @@ AMovementActor::AMovementActor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	collisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxCollider"));
+	collisionBox->SetBoxExtent(FVector(55.f, 55.f, 50.f));
+	collisionBox->SetCollisionProfileName(FName("BlockAllDynamic"));
+	collisionBox->CanCharacterStepUpOn = ECB_No;
+	collisionBox->bShouldUpdatePhysicsVolume = true;
+	collisionBox->bCheckAsyncSceneOnMove = false;
+	collisionBox->SetCanEverAffectNavigation(false);
+	collisionBox->bDynamicObstacle = true;
+	collisionBox->RegisterComponent();
+	SetRootComponent(collisionBox);
 }
 
 // Called when the game starts or when spawned
@@ -42,8 +51,9 @@ void AMovementActor::Tick(float DeltaTime)
 			if (SetActorLocation(lerp, true, &HitResult) == false)
 			{
 				// Check if it hit something
-				if (HitResult.GetActor() != nullptr)
+				if (HitResult.GetComponent())
 				{
+					UE_LOG(LogTemp, Warning, TEXT("Hit the following component: %s"), *HitResult.GetComponent()->GetName())
 					// Stop moving if hit something
 					// todo: check if moving away from object
 					StopMovement();

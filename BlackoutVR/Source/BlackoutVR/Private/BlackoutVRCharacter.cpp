@@ -47,10 +47,8 @@ void ABlackoutVRCharacter::TouchEnter(ETouchIndex::Type fingerIndex, FVector tou
 		if (!CheckActorBeenTouched(actor))
 		{
 			AddFingerTouchToArray(fingerIndex, hitLocation, actor);
-			UE_LOG(LogTemp, Log, TEXT("Touched my trallala: %s"), *hitLocation.ToString())
 		}
 	}
-	UE_LOG(LogTemp, Log, TEXT("After my trallala"))
 }
 
 void ABlackoutVRCharacter::TouchMoved(ETouchIndex::Type fingerIndex, FVector touchLocation)
@@ -80,10 +78,7 @@ void ABlackoutVRCharacter::TouchExit(ETouchIndex::Type fingerIndex, FVector touc
 		ITouchActor::Execute_StopActorMovement(touchedActor);
 	}
 
-
-	UE_LOG(LogTemp, Log, TEXT("After my trallala: %s"), *FString::FromInt(touchStructs.Num()));
 	RemoveTouchFromArray(fingerIndex);
-	UE_LOG(LogTemp, Log, TEXT("Removed my trallala: %s"), *FString::FromInt(touchStructs.Num()));
 }
 
 bool ABlackoutVRCharacter::CheckIfTouchedActor(FVector2D touchLocation, FVector& hitLocation, AActor*& actor)
