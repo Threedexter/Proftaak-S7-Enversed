@@ -100,7 +100,7 @@ bool ABlackoutVRCharacter::HasTouchedActor(ETouchIndex::Type fingerIndex)
 {
 	for(FFingerTouch touchStruct : touchStructs)
 	{
-		if(touchStruct.fingerIndex == fingerIndex)
+		if(touchStruct.fingerIndex == fingerIndex && touchStruct.touchedActor)
 		{
 			return true;
 		}
