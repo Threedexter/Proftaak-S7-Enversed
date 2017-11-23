@@ -10,13 +10,14 @@ AMovementActor::AMovementActor()
 	PrimaryActorTick.bCanEverTick = true;
 	collisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxCollider"));
 	collisionBox->SetBoxExtent(FVector(55.f, 55.f, 50.f));
-	collisionBox->SetCollisionProfileName(FName("BlockAllDynamic"));
+	collisionBox->SetCollisionProfileName(FName("Pawn"));
 	collisionBox->CanCharacterStepUpOn = ECB_No;
 	collisionBox->bShouldUpdatePhysicsVolume = true;
 	collisionBox->bCheckAsyncSceneOnMove = false;
 	collisionBox->SetCanEverAffectNavigation(false);
 	collisionBox->bDynamicObstacle = true;
 	collisionBox->RegisterComponent();
+	collisionBox->bEditableWhenInherited = true;
 	SetRootComponent(collisionBox);
 }
 

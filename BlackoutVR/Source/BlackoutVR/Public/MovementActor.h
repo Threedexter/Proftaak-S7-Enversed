@@ -17,7 +17,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category="Movement")
 	float speed = 1.0f;
 
-	UPROPERTY(Category = Character, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(Category = Character, EditAnyWhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	UBoxComponent* collisionBox;
 
 public:	
