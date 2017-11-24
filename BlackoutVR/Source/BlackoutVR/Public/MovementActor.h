@@ -20,6 +20,9 @@ public:
 	UPROPERTY(Category = Character, EditAnyWhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	UBoxComponent* collisionBox;
 
+	UPROPERTY(Category = "Scene", EditAnyWhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	USceneComponent* root;
+
 public:	
 	// Sets default values for this actor's properties
 	AMovementActor();

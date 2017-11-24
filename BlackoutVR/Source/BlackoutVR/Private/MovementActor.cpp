@@ -9,6 +9,7 @@ AMovementActor::AMovementActor()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	collisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxCollider"));
+	SetRootComponent(collisionBox);
 	collisionBox->SetBoxExtent(FVector(55.f, 55.f, 50.f));
 	collisionBox->SetCollisionProfileName(FName("Pawn"));
 	collisionBox->CanCharacterStepUpOn = ECB_No;
@@ -18,7 +19,7 @@ AMovementActor::AMovementActor()
 	collisionBox->bDynamicObstacle = true;
 	collisionBox->RegisterComponent();
 	collisionBox->bEditableWhenInherited = true;
-	SetRootComponent(collisionBox);
+	collisionBox->AttachTo(root);
 }
 
 // Called when the game starts or when spawned
