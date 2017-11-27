@@ -7,13 +7,14 @@
 #include "VRCapture2D.h"
 #include "TouchActor.h"
 #include "FFingerTouch.h"
+#include "ScoreKeeper.h"
 #include "BlackoutVRCharacter.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class BLACKOUTVR_API ABlackoutVRCharacter : public AVRSimpleCharacter
+class BLACKOUTVR_API ABlackoutVRCharacter : public AVRSimpleCharacter, public IScoreKeeper
 {
 	GENERATED_BODY()
 
@@ -29,6 +30,12 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Touch|Actors")
 		TArray<FFingerTouch> touchStructs;
+
+	UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category = "Score")
+		int currentScore = 0;
+
+	UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category = "Score")
+		FString Name;
 
 private:
 		AVRCapture2D* currentSpecCam;
@@ -84,4 +91,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
 	void SetTouchedActorMovementLocation(ETouchIndex::Type fingerIndex, FVector hitLocation);
+
+	virtual void AddToScore_Implementation(int score) override;
+	virtual void SetScore_Implementation(int score) override;
+	virtual int GetScore_Implementation() override;
+	virtual FString GetCName_Implementation() override;
 };

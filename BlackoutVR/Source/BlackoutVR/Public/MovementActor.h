@@ -6,10 +6,11 @@
 #include "GameFramework/Actor.h"
 #include "TouchActor.h"
 #include "Components/BoxComponent.h"
+#include "ScoreKeeper.h"
 #include "MovementActor.generated.h"
 
 UCLASS()
-class BLACKOUTVR_API AMovementActor : public AActor, public ITouchActor
+class BLACKOUTVR_API AMovementActor : public AActor, public ITouchActor, public IScoreKeeper
 {
 GENERATED_BODY()
 	
@@ -22,6 +23,12 @@ public:
 
 	UPROPERTY(Category = "Scene", EditAnyWhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	USceneComponent* root;
+
+	UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category = "Score")
+		int currentScore = 0;
+
+	UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category = "Score")
+		FString Name;
 
 public:	
 	// Sets default values for this actor's properties
@@ -42,8 +49,12 @@ public:
 	void StopMovement();
 
 	virtual void SetMoveActorLocation_Implementation(FVector moveLocation) override;
-
 	virtual void StopActorMovement_Implementation() override;
+
+	virtual void AddToScore_Implementation(int score) override;
+	virtual void SetScore_Implementation(int score) override;
+	virtual int GetScore_Implementation() override;
+	virtual FString GetCName_Implementation() override;
 
 private:
 	FVector desiredPoint;
