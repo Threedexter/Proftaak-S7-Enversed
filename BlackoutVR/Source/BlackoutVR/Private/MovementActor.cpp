@@ -90,3 +90,20 @@ void AMovementActor::StopActorMovement_Implementation()
 	StopMovement();
 }
 
+
+void AMovementActor::SetScore_Implementation(int score)
+{
+	currentScore = score;
+}
+void AMovementActor::AddToScore_Implementation(int score)
+{
+	currentScore += score;
+}
+int AMovementActor::GetScore_Implementation()
+{
+	return currentScore;
+}
+FString AMovementActor::GetCName_Implementation()
+{
+	return Name;
+}
