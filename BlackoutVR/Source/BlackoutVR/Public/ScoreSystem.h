@@ -22,10 +22,10 @@ class BLACKOUTVR_API UScoreSystem : public UBlueprintFunctionLibrary
 	TArray<AActor*> GetTouchActors();
 
 	// Gets all the scores
-	TArray<FScoreData*> UScoreSystem::GetAllScores();
+	TArray<FScoreData*> GetAllScores();
 
 	// Gets all the touch scores
-	TArray<FScoreData*> UScoreSystem::GetTouchScores();
+	TArray<FScoreData*> GetTouchScores();
 
 	// Gets the winner of the touch players
 	FScoreData* GetTouchWinner();
