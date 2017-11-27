@@ -188,3 +188,19 @@ bool ABlackoutVRCharacter::TouchTrace(FVector2D touchLocation, FHitResult& hit)
 	return GetWorld()->LineTraceSingleByChannel(hit, spec->GetActorLocation(), traceEnd, ECollisionChannel::ECC_Visibility, params, colResponseParams);
 }
 
+void ABlackoutVRCharacter::SetScore_Implementation(int score)
+{
+	currentScore = score;
+}
+void ABlackoutVRCharacter::AddToScore_Implementation(int score)
+{
+	currentScore += score;
+}
+int ABlackoutVRCharacter::GetScore_Implementation()
+{
+	return currentScore;
+}
+FString ABlackoutVRCharacter::GetCName_Implementation()
+{
+	return Name;
+}
