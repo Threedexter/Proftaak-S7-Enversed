@@ -33,6 +33,10 @@ void ATwinActor::BeginPlay()
 void ATwinActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if (mimic && !teleportOnly)
+	{
+		mimic->SetActorLocationAndRotation(GetActorLocation() + location, GetActorRotation());
+	}
 }
 
 void ATwinActor::LinkActor(AActor* mimic)
@@ -68,6 +72,7 @@ void ATwinActor::SpawnBluePrint()
 
 	FActorSpawnParameters SpawnInfo;
 	SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+	SpawnInfo.Owner = this;
 
 	LinkActor(TheWorld->SpawnActor<AActor>(bluePrint, Loc, Rot, SpawnInfo));
 }

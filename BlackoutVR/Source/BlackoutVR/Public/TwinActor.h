@@ -18,13 +18,22 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category = "Spawning")
 		bool relativeLocation = true;
 
+	//UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category = "Spawning")
+	//	bool relativeRotation = true;
+
+	UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category = "Spawning")
+		bool teleportOnly = true;
+
 	UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category = "Spawning")
 		FVector location;
+
+	//UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category = "Spawning")
+	//	FVector rotation;
 
 	UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category = "Spawning")
 		UBlueprint* bluePrintObject;
 
-	UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category = "Location")
+	UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category = "Spawning")
 		AActor* mimic;
 
 protected:
