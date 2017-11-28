@@ -2,6 +2,7 @@
 
 #include "BlackoutVRCharacter.h"
 #include <string>
+#include "TouchScreenHandler.h"
 
 
 ABlackoutVRCharacter::ABlackoutVRCharacter()
@@ -21,6 +22,9 @@ void ABlackoutVRCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 void ABlackoutVRCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	touch_screen_handler = TouchScreenHandler();
+
 	if (GetSpectatorCam())
 	{
 		UE_LOG(LogTemp, Log, TEXT("Found the spec cam"))

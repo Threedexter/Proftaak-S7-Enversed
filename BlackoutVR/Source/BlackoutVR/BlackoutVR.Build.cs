@@ -11,6 +11,10 @@ public class BlackoutVR : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		
+        Definitions.Add("WINVER=0x0A00");  
+        Definitions.Add("_WIN32_WINNT_WINBLUE=0x0A00");  
+        Definitions.Add("_CRT_SECURE_NO_WARNINGS");  
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });

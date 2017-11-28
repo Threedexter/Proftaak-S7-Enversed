@@ -8,6 +8,7 @@
 #include "TouchActor.h"
 #include "FFingerTouch.h"
 #include "ScoreKeeper.h"
+#include "TouchScreenHandler.h"
 #include "BlackoutVRCharacter.generated.h"
 
 /**
@@ -39,6 +40,7 @@ public:
 
 private:
 		AVRCapture2D* currentSpecCam;
+		TouchScreenHandler touch_screen_handler;
 	
 public:
 
