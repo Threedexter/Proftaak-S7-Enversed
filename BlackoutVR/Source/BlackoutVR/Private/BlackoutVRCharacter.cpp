@@ -44,6 +44,10 @@ AVRCapture2D* ABlackoutVRCharacter::GetSpectatorCam()
 
 void ABlackoutVRCharacter::TouchEnter(ETouchIndex::Type fingerIndex, FVector touchLocation)
 {
+	lastTouchLocation = FVector2D(touchLocation.X, touchLocation.Y);
+	onTouchUpdate.Broadcast(FVector2D(touchLocation.X, touchLocation.Y), true);
+	if (endGame) return;
+
 	AActor* actor;
 	FVector hitLocation;
 	if (CheckIfTouchedActor(FVector2D(touchLocation.X, touchLocation.Y), hitLocation, actor))
@@ -57,6 +61,10 @@ void ABlackoutVRCharacter::TouchEnter(ETouchIndex::Type fingerIndex, FVector tou
 
 void ABlackoutVRCharacter::TouchMoved(ETouchIndex::Type fingerIndex, FVector touchLocation)
 {
+	lastTouchLocation = FVector2D(touchLocation.X, touchLocation.Y);
+	onTouchUpdate.Broadcast(FVector2D(touchLocation.X, touchLocation.Y),false);
+	if (endGame) return;
+
 	if(!HasTouchedActor(fingerIndex))
 	{
 		return;
@@ -71,6 +79,9 @@ void ABlackoutVRCharacter::TouchMoved(ETouchIndex::Type fingerIndex, FVector tou
 
 void ABlackoutVRCharacter::TouchExit(ETouchIndex::Type fingerIndex, FVector touchLocation)
 {
+	lastTouchLocation = FVector2D(touchLocation.X, touchLocation.Y);
+	if (endGame) return;
+
 	if (!HasTouchedActor(fingerIndex))
 	{
 		return;
@@ -168,6 +179,11 @@ void ABlackoutVRCharacter::SetTouchedActorMovementLocation(ETouchIndex::Type fin
 	}
 }
 
+FVector2D ABlackoutVRCharacter::GetLastTouchLocation()
+{
+	return lastTouchLocation;
+}
+
 bool ABlackoutVRCharacter::TouchTrace(FVector2D touchLocation, FHitResult& hit)
 {
 	FVector worldLocation;
@@ -194,10 +210,13 @@ bool ABlackoutVRCharacter::TouchTrace(FVector2D touchLocation, FHitResult& hit)
 
 void ABlackoutVRCharacter::SetScore_Implementation(int score)
 {
+	if (endGame) return;
 	currentScore = score;
 }
+
 void ABlackoutVRCharacter::AddToScore_Implementation(int score)
 {
+	if (endGame) return;
 	currentScore += score;
 }
 int ABlackoutVRCharacter::GetScore_Implementation()

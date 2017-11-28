@@ -14,9 +14,13 @@
 /**
  * 
  */
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FUpdateTouchPosition, FVector2D, TouchLocation, bool, IsTouch);
+
 UCLASS()
 class BLACKOUTVR_API ABlackoutVRCharacter : public AVRSimpleCharacter, public IScoreKeeper
 {
+	
+
 	GENERATED_BODY()
 
 public:
@@ -37,6 +41,15 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category = "Score")
 		FString Name;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnyWhere, Category = "Touch|Location")
+		FVector2D lastTouchLocation;
+
+	UPROPERTY(BlueprintAssignable)
+		FUpdateTouchPosition onTouchUpdate;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Game")
+		bool endGame = false;
 
 private:
 		AVRCapture2D* currentSpecCam;
@@ -93,6 +106,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
 	void SetTouchedActorMovementLocation(ETouchIndex::Type fingerIndex, FVector hitLocation);
+
+	UFUNCTION(BlueprintPure, Category = "Touch|Location")
+	FVector2D GetLastTouchLocation();
 
 	virtual void AddToScore_Implementation(int score) override;
 	virtual void SetScore_Implementation(int score) override;
