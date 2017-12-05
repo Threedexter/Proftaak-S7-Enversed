@@ -119,6 +119,10 @@ int AMovementActor::GetScore_Implementation()
 {
 	return currentScore;
 }
+void AMovementActor::SetCName_Implementation(int name)
+{
+	Name = FString::Printf(TEXT("P%d"), name);
+}
 FString AMovementActor::GetCName_Implementation()
 {
 	return Name;

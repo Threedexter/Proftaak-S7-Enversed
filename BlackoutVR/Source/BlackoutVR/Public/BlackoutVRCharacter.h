@@ -9,6 +9,7 @@
 #include "FFingerTouch.h"
 #include "ScoreKeeper.h"
 #include "TouchScreenHandler.h"
+#include "ITouchData.h"
 #include "BlackoutVRCharacter.generated.h"
 
 /**
@@ -17,7 +18,7 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FUpdateTouchPosition, FVector2D, TouchLocation, bool, IsTouch);
 
 UCLASS()
-class BLACKOUTVR_API ABlackoutVRCharacter : public AVRSimpleCharacter, public IScoreKeeper
+class BLACKOUTVR_API ABlackoutVRCharacter : public AVRSimpleCharacter, public IScoreKeeper, public IITouchData
 {
 	
 
@@ -114,4 +115,6 @@ public:
 	virtual void SetScore_Implementation(int score) override;
 	virtual int GetScore_Implementation() override;
 	virtual FString GetCName_Implementation() override;
+	virtual void SetCName_Implementation(int name) override;
+	virtual FVector2D GetTouchLocation_Implementation(int playerID) override;
 };

@@ -184,6 +184,30 @@ FVector2D ABlackoutVRCharacter::GetLastTouchLocation()
 	return lastTouchLocation;
 }
 
+FVector2D ABlackoutVRCharacter::GetTouchLocation_Implementation(int playerID)
+{
+	//check if is being touched
+	FFingerTouch* touched = nullptr;
+
+	for (FFingerTouch touchStruct : touchStructs)
+	{
+		FString name = IScoreKeeper::Execute_GetCName(touchStruct.touchedActor);
+		FString pid = FString::FromInt(playerID);
+		if (name.Contains(pid)) // limited to 10
+		{
+			touched = &touchStruct;
+			break;
+		}
+	}
+	// if touched
+	if (touched)
+	{
+		// return current finger touch on screen
+		return FVector2D(touched->lastTouchedPosition.X, touched->lastTouchedPosition.Y);
+	}
+	else return FVector2D(-1,-1);
+}
+
 bool ABlackoutVRCharacter::TouchTrace(FVector2D touchLocation, FHitResult& hit)
 {
 	FVector worldLocation;
@@ -226,4 +250,8 @@ int ABlackoutVRCharacter::GetScore_Implementation()
 FString ABlackoutVRCharacter::GetCName_Implementation()
 {
 	return Name;
+}
+void ABlackoutVRCharacter::SetCName_Implementation(int name)
+{
+	Name = TEXT("P%d"),name;
 }

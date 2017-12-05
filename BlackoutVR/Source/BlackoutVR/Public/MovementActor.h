@@ -58,6 +58,7 @@ public:
 	virtual void SetScore_Implementation(int score) override;
 	virtual int GetScore_Implementation() override;
 	virtual FString GetCName_Implementation() override;
+	virtual void SetCName_Implementation(int name) override;
 
 private:
 	FVector desiredPoint;
