@@ -40,7 +40,8 @@ protected:
 
 public:	
 	// Called every frame
-	virtual void Tick(float DeltaTime) override;	
+	virtual void Tick(float DeltaTime) override;
+	void StartMoving();
 
 	UFUNCTION(BlueprintCallable, Category = "Movement")
 	void MoveToLocation(FVector point);
@@ -50,6 +51,8 @@ public:
 
 	virtual void SetMoveActorLocation_Implementation(FVector moveLocation) override;
 	virtual void StopActorMovement_Implementation() override;
+	virtual void ActorStoppedMoving_Implementation() override;
+	virtual void ActorStartedMoving_Implementation() override;
 
 	virtual void AddToScore_Implementation(int score) override;
 	virtual void SetScore_Implementation(int score) override;

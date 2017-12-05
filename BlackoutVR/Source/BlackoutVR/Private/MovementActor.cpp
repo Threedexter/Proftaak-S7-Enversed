@@ -65,12 +65,19 @@ void AMovementActor::Tick(float DeltaTime)
 	}
 }
 
+void AMovementActor::StartMoving()
+{
+	if (moving) return;
+	moving = true;
+	ITouchActor::Execute_ActorStartedMoving(this);
+}
+
 // Moves to a location through lerping
 void AMovementActor::MoveToLocation(FVector point)
 {
 	AMovementActor::desiredPoint = point; // set the desired end point
 	AMovementActor::desiredPoint.Z = GetActorLocation().Z; // Do not lerp into the air or below the ground
-	AMovementActor::moving = true; // start moving
+	StartMoving();
 }
 
 // Ends and cleans movement
@@ -88,6 +95,15 @@ void AMovementActor::SetMoveActorLocation_Implementation(FVector moveLocation)
 void AMovementActor::StopActorMovement_Implementation()
 {
 	StopMovement();
+	ITouchActor::Execute_ActorStoppedMoving(this);
+}
+
+void AMovementActor::ActorStoppedMoving_Implementation()
+{
+}
+
+void AMovementActor::ActorStartedMoving_Implementation()
+{
 }
 
 
