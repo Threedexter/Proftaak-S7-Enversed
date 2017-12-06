@@ -64,11 +64,20 @@ void ABlackoutVRCharacter::TouchMoved(ETouchIndex::Type fingerIndex, FVector tou
 	lastTouchLocation = FVector2D(touchLocation.X, touchLocation.Y);
 	onTouchUpdate.Broadcast(FVector2D(touchLocation.X, touchLocation.Y),false);
 	if (endGame) return;
+	bool touched = false;
 
-	if(!HasTouchedActor(fingerIndex))
+	for (FFingerTouch& touchStruct : touchStructs)
 	{
-		return;
+		if (touchStruct.fingerIndex == fingerIndex)
+		{
+			touchStruct.lastTouchedPositionOnScreen.X = touchLocation.X;
+			touchStruct.lastTouchedPositionOnScreen.Y = touchLocation.Y;
+			touched = true;
+			break;
+		}
 	}
+	if (!touched) return;
+	
 
 	FHitResult hit;
 	if(TouchTrace(FVector2D(touchLocation.X, touchLocation.Y), hit))
@@ -137,7 +146,8 @@ bool ABlackoutVRCharacter::CheckActorBeenTouched(AActor* actor)
 
 void ABlackoutVRCharacter::AddFingerTouchToArray(ETouchIndex::Type fingerIndex, FVector hitLocation, AActor* actor)
 {
-	touchStructs.Add(FFingerTouch(fingerIndex, hitLocation, actor));
+	FVector2D empty = FVector2D(0, 0);
+	touchStructs.Add(FFingerTouch(fingerIndex, hitLocation, actor, empty));
 }
 
 void ABlackoutVRCharacter::RemoveTouchFromArray(ETouchIndex::Type fingerIndex)
@@ -203,7 +213,7 @@ FVector2D ABlackoutVRCharacter::GetTouchLocation_Implementation(int playerID)
 	if (touched)
 	{
 		// return current finger touch on screen
-		return FVector2D(touched->lastTouchedPosition.X, touched->lastTouchedPosition.Y);
+		return touched->lastTouchedPositionOnScreen;
 	}
 	else return FVector2D(-1,-1);
 }
