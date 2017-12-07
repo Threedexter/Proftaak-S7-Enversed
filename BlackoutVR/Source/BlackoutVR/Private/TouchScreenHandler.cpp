@@ -10,12 +10,22 @@ struct HD {
 	HWND best_handle;
 };
 
+static bool killedTouch;
+
 TouchScreenHandler::TouchScreenHandler()
 {
-	HWND hwnd = GetGameHandler(GetCurrentProcessId());
+#if(WINVER >= 0x0602)
+	if (!killedTouch)
+	{
+		KillTouch();
+	}
+}
+
+void TouchScreenHandler::KillTouch()
+{
+	HWND hwnd = GetActiveWindow();
 	if (IsTouchWindow(hwnd, 0)) {
 		BOOL fEnabled = FALSE;
-		//#if(WINVER >= 0x0602)
 		SetWindowFeedbackSetting(hwnd,
 			FEEDBACK_TOUCH_CONTACTVISUALIZATION,
 			0, sizeof(fEnabled), &fEnabled);
@@ -31,34 +41,17 @@ TouchScreenHandler::TouchScreenHandler()
 		SetWindowFeedbackSetting(hwnd,
 			FEEDBACK_TOUCH_RIGHTTAP,
 			0, sizeof(fEnabled), &fEnabled);
-		//#endif
 	}
+#endif
 }
 
-HWND TouchScreenHandler::GetGameHandler(unsigned long process_id)
+FVector2D TouchScreenHandler::GetGameSize()
 {
-	HD data;
-	data.process_id = process_id;
-	data.best_handle = 0;
-	EnumWindows(EnumWindowsCallback, (LPARAM)&data);
-	return data.best_handle;
-}
+	RECT rect = RECT();
+	HWND hwnd = GetActiveWindow();
+	GetClientRect(hwnd, &rect);
 
-BOOL CALLBACK TouchScreenHandler::EnumWindowsCallback(HWND handle, LPARAM lParam)
-{
-	HD& data = *(HD*)lParam;
-	unsigned long process_id = 0;
-	GetWindowThreadProcessId(handle, &process_id);
-	if (data.process_id != process_id || !IsMainWindow(handle)) {
-		return TRUE;
-	}
-	data.best_handle = handle;
-	return FALSE;
-}
-
-BOOL TouchScreenHandler::IsMainWindow(HWND handle)
-{
-	return GetWindow(handle, GW_OWNER) == (HWND)0 && IsWindowVisible(handle);
+	return FVector2D(rect.right, rect.bottom);
 }
 
 TouchScreenHandler::~TouchScreenHandler()
