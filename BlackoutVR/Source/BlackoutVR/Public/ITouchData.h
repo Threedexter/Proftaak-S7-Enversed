@@ -24,5 +24,7 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Touch|Location")
 		FVector2D GetTouchLocation(int playerID);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Touch|Location")
+		void StopDrag(AActor* actor);
 	
 };

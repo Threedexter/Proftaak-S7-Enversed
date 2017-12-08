@@ -217,6 +217,25 @@ FVector2D ABlackoutVRCharacter::GetTouchLocation_Implementation(int playerID)
 	}
 	else return FVector2D(-1,-1);
 }
+void ABlackoutVRCharacter::StopDrag_Implementation(AActor* actor)
+{
+	FFingerTouch* touched = nullptr;
+
+	for (FFingerTouch touchStruct : touchStructs)
+	{
+		if (touchStruct.touchedActor == actor)
+		{
+			touched = &touchStruct;
+			break;
+		}
+	}
+
+	if (touched)
+	{
+		ITouchActor::Execute_StopActorMovement(actor);
+		RemoveTouchFromArray(touched->fingerIndex);
+	}
+}
 
 bool ABlackoutVRCharacter::TouchTrace(FVector2D touchLocation, FHitResult& hit)
 {

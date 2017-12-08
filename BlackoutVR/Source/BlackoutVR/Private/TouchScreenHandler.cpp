@@ -3,14 +3,10 @@
 #define STRICT
 #include "TouchScreenHandler.h"
 #include <windows.h>
-#include <ole2.h>
-
-struct HD {
-	unsigned long process_id;
-	HWND best_handle;
-};
 
 static bool killedTouch;
+
+#define WM_EXITSIZEMOVE                 0x0232
 
 TouchScreenHandler::TouchScreenHandler()
 {
@@ -52,6 +48,30 @@ FVector2D TouchScreenHandler::GetGameSize()
 	GetClientRect(hwnd, &rect);
 
 	return FVector2D(rect.right, rect.bottom);
+}
+
+// attach in the future
+LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	switch (uMsg)
+	{
+		//..
+	case WM_EXITSIZEMOVE :
+		{
+			// on stop resize
+			int width = LOWORD(lParam), height = HIWORD(lParam);
+			UE_LOG(LogTemp, Warning, TEXT("Resized to %d,%d"), width, height);
+		}
+	case WM_SIZE:
+		{
+			// on resize
+			int width = LOWORD(lParam), height = HIWORD(lParam);
+			UE_LOG(LogTemp, Warning, TEXT("Resizing to %d,%d"), width, height);
+		}
+		// ..
+		break;
+	}
+	return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
 TouchScreenHandler::~TouchScreenHandler()
