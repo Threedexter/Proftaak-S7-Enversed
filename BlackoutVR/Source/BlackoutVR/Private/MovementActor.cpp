@@ -113,7 +113,18 @@ void AMovementActor::SetScore_Implementation(int score)
 }
 void AMovementActor::AddToScore_Implementation(int score)
 {
-	currentScore += score;
+	if (score < 0)
+	{
+		int t = currentScore - score;
+		if (t < 0)
+		{
+			t = 0;
+		}
+		currentScore = t;
+	} else
+	{
+		currentScore += score;
+	}
 }
 int AMovementActor::GetScore_Implementation()
 {
