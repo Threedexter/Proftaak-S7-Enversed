@@ -3,13 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "SimpleChar/VRSimpleCharacter.h"
+#include "GameFramework/Character.h"
 #include "VRCapture2D.h"
 #include "TouchActor.h"
 #include "FFingerTouch.h"
 #include "ScoreKeeper.h"
 #include "TouchScreenHandler.h"
 #include "ITouchData.h"
+#include "Kismet/GameplayStatics.h"
 #include "BlackoutVRCharacter.generated.h"
 
 /**
@@ -18,7 +19,7 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FUpdateTouchPosition, FVector2D, TouchLocation, bool, IsTouch);
 
 UCLASS()
-class BLACKOUTVR_API ABlackoutVRCharacter : public AVRSimpleCharacter, public IScoreKeeper, public IITouchData
+class BLACKOUTVR_API ABlackoutVRCharacter : public ACharacter, public IScoreKeeper, public IITouchData
 {
 	
 
