@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include <windows.h>
 
 /**
  * 
@@ -15,5 +16,6 @@ public:
 	~TouchScreenHandler();
 
 private:
+	LRESULT WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 	void KillTouch();
 };
