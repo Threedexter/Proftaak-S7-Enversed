@@ -117,4 +117,5 @@ public:
 	virtual FString GetCName_Implementation() override;
 	virtual void SetCName_Implementation(int name) override;
 	virtual FVector2D GetTouchLocation_Implementation(int playerID) override;
+	virtual void StopDrag_Implementation(AActor* actor) override;
 };
