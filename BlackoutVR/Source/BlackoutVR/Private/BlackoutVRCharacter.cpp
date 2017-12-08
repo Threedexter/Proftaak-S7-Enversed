@@ -230,16 +230,13 @@ bool ABlackoutVRCharacter::TouchTrace(FVector2D touchLocation, FHitResult& hit)
 	}
 	else { return false; }
 
-	const FRotator rot(0, 270, 0);
-	FVector traceRot = rot.RotateVector(worldLocation);
-	FVector traceEnd = spec->GetActorLocation() - (FVector((((traceRot.X * -1) / raySpread) + rayOffset), traceRot.Y, traceRot.Z) * rayDistance);
-
 	FCollisionQueryParams params;
 	params.AddIgnoredActor(this);
 
 	FCollisionResponseParams colResponseParams;
 	colResponseParams.CollisionResponse.SetAllChannels(ECollisionResponse::ECR_Block);
-	return GetWorld()->LineTraceSingleByChannel(hit, spec->GetActorLocation(), traceEnd, ECollisionChannel::ECC_Visibility, params, colResponseParams);
+	return GetWorld()->LineTraceSingleByChannel(hit, spec->GetActorLocation(), 
+		spec->GetActorLocation() - (worldDirection * rayDistance), ECollisionChannel::ECC_Visibility, params, colResponseParams);
 }
 
 void ABlackoutVRCharacter::SetScore_Implementation(int score)
