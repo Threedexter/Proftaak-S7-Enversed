@@ -26,12 +26,6 @@ class BLACKOUTVR_API ABlackoutVRCharacter : public AVRSimpleCharacter, public IS
 
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Touch|Ray")
-		float raySpread = 1.65f;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Touch|Ray")
-		float rayOffset = 0.05f;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Touch|Ray")
 		float rayDistance = 10000.f;
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Touch|Actors")

@@ -64,12 +64,13 @@ void ABlackoutVRCharacter::TouchMoved(ETouchIndex::Type fingerIndex, FVector tou
 	lastTouchLocation = FVector2D(touchLocation.X, touchLocation.Y);
 	onTouchUpdate.Broadcast(FVector2D(touchLocation.X, touchLocation.Y),false);
 	if (endGame) return;
+	
 	bool touched = false;
-
 	for (FFingerTouch& touchStruct : touchStructs)
 	{
-		if (touchStruct.fingerIndex == fingerIndex)
+		if (touchStruct.fingerIndex == fingerIndex && currentSpecCam)
 		{
+			//currentSpecCam->RayCastWorld(touchLocation, rayDistance);
 			touchStruct.lastTouchedPositionOnScreen.X = touchLocation.X;
 			touchStruct.lastTouchedPositionOnScreen.Y = touchLocation.Y;
 			touched = true;
