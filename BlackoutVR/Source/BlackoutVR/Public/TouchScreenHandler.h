@@ -12,7 +12,7 @@ class BLACKOUTVR_API TouchScreenHandler
 {
 public:
 	TouchScreenHandler();
-	FVector2D GetGameSize();
+	static FVector2D GetGameSize();
 	~TouchScreenHandler();
 
 private:

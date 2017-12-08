@@ -7,3 +7,9 @@
 	return USpectatorWidgetInteraction::FWidgetTraceResult();
 }
 */
+void USpectatorWidgetInteraction::SetCustomHitResultAndUpdate(const FHitResult& HitResult)
+{
+	bEnableHitTesting = true;
+	CustomHitResult = HitResult;
+	SimulatePointerMovement();
+}

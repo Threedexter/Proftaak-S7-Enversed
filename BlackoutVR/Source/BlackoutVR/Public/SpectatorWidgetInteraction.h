@@ -10,7 +10,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(ClassGroup = "UserInterface", meta = (BlueprintSpawnableComponent))
 class BLACKOUTVR_API USpectatorWidgetInteraction : public UWidgetInteractionComponent
 {
 	GENERATED_BODY()
@@ -19,5 +19,11 @@ class BLACKOUTVR_API USpectatorWidgetInteraction : public UWidgetInteractionComp
 protected:
 		//FWidgetTraceResult PerformTrace() const override;
 	
+public:
+	/**
+	* Set custom hit result.  This is only taken into account if InteractionSource is set to EWidgetInteractionSource::Custom.
+	*/
+	UFUNCTION(BlueprintCallable, Category = "Interaction")
+		void SetCustomHitResultAndUpdate(const FHitResult& HitResult);
 	
 };
