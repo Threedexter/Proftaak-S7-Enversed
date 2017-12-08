@@ -115,7 +115,7 @@ void AMovementActor::AddToScore_Implementation(int score)
 {
 	if (score < 0)
 	{
-		int t = currentScore - score;
+		int t = currentScore + score;
 		if (t < 0)
 		{
 			t = 0;
