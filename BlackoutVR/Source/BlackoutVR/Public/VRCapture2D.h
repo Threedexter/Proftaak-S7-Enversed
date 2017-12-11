@@ -20,7 +20,7 @@ public:
 		TEnumAsByte<ECollisionChannel> UITraceChannel = ECollisionChannel::ECC_GameTraceChannel1;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "UI|CollisionChannel|Debug")
-		bool bShowDebug = true;
+		bool bShowDebug = false;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "UI|CollisionChannel|Debug")
 		FLinearColor linearColor;
@@ -33,8 +33,11 @@ public:
 	AVRCapture2D(const FObjectInitializer& ObjectInitializer);
 
 	UFUNCTION(BlueprintCallable, Category="Screen")
-	void ScreenToSieWorld(FVector2D touchPosition, FVector& worldLocation, FVector& worldDirection);
+	void ScreenToWorld(FVector2D touchPosition, FVector& worldLocation, FVector& worldDirection);
 	
 	UFUNCTION(BlueprintCallable, Category="Screen")
 	FHitResult RayCastWorld(FVector2D touchPosition, float rayDistance);
+
+	UFUNCTION(BlueprintCallable, Category = "Screen")
+	bool CheckIfTouchedWidgetFromCamera(FVector2D touchPosition, float rayDistance, FVector2D& touchLocationWidget, FHitResult& touchLocationWorld);
 };

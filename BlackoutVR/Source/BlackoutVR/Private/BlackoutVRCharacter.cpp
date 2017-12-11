@@ -69,20 +69,19 @@ void ABlackoutVRCharacter::TouchMoved(ETouchIndex::Type fingerIndex, FVector tou
 	onTouchUpdate.Broadcast(FVector2D(touchLocation.X, touchLocation.Y),false);
 	if (endGame) return;
 	
-	bool touched = false;
 	for (FFingerTouch& touchStruct : touchStructs)
 	{
 		if (touchStruct.fingerIndex == fingerIndex && currentSpecCam)
 		{
-			//currentSpecCam->RayCastWorld(touchLocation, rayDistance);
-			touchStruct.lastTouchedPositionOnScreen.X = touchLocation.X;
-			touchStruct.lastTouchedPositionOnScreen.Y = touchLocation.Y;
-			touched = true;
+			FVector2D widgetTouchLocation;
+			FHitResult hitLocation;
+			if (currentSpecCam->CheckIfTouchedWidgetFromCamera(FVector2D(touchLocation.X, touchLocation.Y), rayDistance, widgetTouchLocation, hitLocation)){
+				touchStruct.lastTouchedWidgetPosition.X = widgetTouchLocation.X;
+				touchStruct.lastTouchedWidgetPosition.Y = widgetTouchLocation.Y;
+			}
 			break;
 		}
 	}
-	if (!touched) return;
-	
 
 	FHitResult hit;
 	if(TouchTrace(FVector2D(touchLocation.X, touchLocation.Y), hit))
@@ -228,7 +227,7 @@ FVector2D ABlackoutVRCharacter::GetTouchLocation_Implementation(int playerID)
 	if (touched)
 	{
 		// return current finger touch on screen
-		return touched->lastTouchedPositionOnScreen;
+		return touched->lastTouchedWidgetPosition;
 	}
 	else return FVector2D(-1,-1);
 }
@@ -260,7 +259,7 @@ bool ABlackoutVRCharacter::TouchTrace(FVector2D touchLocation, FHitResult& hit)
 
 	if (spec)
 	{
-		spec->ScreenToSieWorld(touchLocation, worldLocation, worldDirection);
+		spec->ScreenToWorld(touchLocation, worldLocation, worldDirection);
 	}
 	else { return false; }
 
