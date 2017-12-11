@@ -8,7 +8,10 @@
 
 ABlackoutVRCharacter::ABlackoutVRCharacter()
 {
-
+	Camera = CreateDefaultSubobject<UCameraComponent>("VRCamera");
+	Camera->SetupAttachment(RootComponent);
+	CreateAndAttachMotionController(LeftMotionController, "LeftMotionController", EControllerHand::Left);
+	CreateAndAttachMotionController(RightMotionController, "RightMotionController", EControllerHand::Right);
 }
 
 void ABlackoutVRCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -193,6 +196,16 @@ void ABlackoutVRCharacter::SetTouchedActorMovementLocation(ETouchIndex::Type fin
 FVector2D ABlackoutVRCharacter::GetLastTouchLocation()
 {
 	return lastTouchLocation;
+}
+
+void ABlackoutVRCharacter::CreateAndAttachMotionController(UMotionControllerComponent* motionController , FName componentName, EControllerHand hand)
+{
+	motionController = CreateDefaultSubobject<UMotionControllerComponent>(componentName);
+	motionController->bAutoActivate = true;
+	motionController->bAutoRegister = true;
+	motionController->Hand = hand;
+	motionController->SetupAttachment(Camera);
+
 }
 
 FVector2D ABlackoutVRCharacter::GetTouchLocation_Implementation(int playerID)
