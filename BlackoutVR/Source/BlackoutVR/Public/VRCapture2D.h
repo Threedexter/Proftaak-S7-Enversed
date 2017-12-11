@@ -28,6 +28,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WidgetInteraction", meta = (AllowPrivateAccess = "true"))
 		USpectatorWidgetInteraction* widgetInteraction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Touch|Rotation")
+		USceneComponent* touchRotationReference;
+
 public:
 
 	AVRCapture2D(const FObjectInitializer& ObjectInitializer);

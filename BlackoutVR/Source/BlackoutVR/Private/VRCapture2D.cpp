@@ -21,19 +21,35 @@ AVRCapture2D::AVRCapture2D(const FObjectInitializer& ObjectInitializer)
 	widgetInteraction->InteractionDistance = 10000.f;
 	widgetInteraction->bEditableWhenInherited = true;
 	widgetInteraction->SetupAttachment(RootComponent);
+
+	touchRotationReference = CreateDefaultSubobject<USceneComponent>(TEXT("TouchRotationReference"));
+	touchRotationReference->RelativeRotation = FRotator(135, 0, 0);
+	widgetInteraction->SetupAttachment(RootComponent);
 }
 
 void AVRCapture2D::ScreenToWorld(FVector2D touchPosition, FVector& worldLocation, FVector& worldDirection)
 {
 	USceneCaptureComponent2D* captureComp = GetCaptureComponent2D();
 	if (captureComp) {
-
 #if  WITH_EDITOR
 		FVector2D touchScreenSize = TouchScreenHandler::GetGameSize();
-		//UE_LOG(LogTemp, Log, TEXT("Window size: %s"), *touchScreenSize.ToString())
 		FSceneView::DeprojectScreenToWorld(touchPosition, FIntRect(0, touchScreenSize.Y, touchScreenSize.X, 0)
 			, captureComp->GetViewState(0)->GetConcreteViewState()->PrevViewMatrices.GetInvProjectionMatrix(), worldLocation, worldDirection);
 
+		UE_LOG(LogTemp, Warning, TEXT("Before Rotation: %s"), *worldDirection.ToString())
+		touchRotationReference->SetRelativeRotation(FRotator(90, 0, 0));
+		FRotator rotation = touchRotationReference->GetComponentRotation();
+		UE_LOG(LogTemp, Warning, TEXT("Rotation: %s"), *rotation.ToString())
+		worldDirection = rotation.RotateVector(worldDirection);
+		UE_LOG(LogTemp, Warning, TEXT("After Rotation touch component: %s"), *worldDirection.ToString())
+
+		//worldDirection = FRotator(0, 0, -90).RotateVector(worldDirection);
+
+		//UE_LOG(LogTemp, Warning, TEXT("After Rotation roll adjustment: %s"), *worldDirection.ToString())
+
+		//worldDirection = captureComp->GetForwardVector().ToOrientationRotator().RotateVector(worldDirection);
+
+		UE_LOG(LogTemp, Warning, TEXT("After Rotation camera component forward vector: %s"), *worldDirection.ToString())
 #else
 		FSceneView::DeprojectScreenToWorld(touchPosition, FIntRect(0, captureComp->TextureTarget->SizeY, captureComp->TextureTarget->SizeX, 0)
 			, captureComp->GetViewState(0)->GetConcreteViewState()->PrevViewMatrices.GetInvProjectionMatrix(), worldLocation, worldDirection);
