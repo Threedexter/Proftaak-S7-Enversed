@@ -9,6 +9,10 @@
 #include "FFingerTouch.h"
 #include "ScoreKeeper.h"
 #include "TouchScreenHandler.h"
+#include "HeadMountedDisplay.h"
+#include "MotionControllerComponent.h"
+#include "Camera/CameraComponent.h"
+#include "IMotionController.h"
 #include "ITouchData.h"
 #include "Kismet/GameplayStatics.h"
 #include "BlackoutVRCharacter.generated.h"
@@ -46,6 +50,15 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Game")
 		bool endGame = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "Controller")
+		UMotionControllerComponent* LeftMotionController;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"),Category = "Controller")
+		UMotionControllerComponent* RightMotionController;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "Controller")
+		UCameraComponent* Camera;
 
 private:
 		AVRCapture2D* currentSpecCam;
@@ -105,6 +118,8 @@ public:
 
 	UFUNCTION(BlueprintPure, Category = "Touch|Location")
 	FVector2D GetLastTouchLocation();
+
+	void CreateAndAttachMotionController(UMotionControllerComponent* motionController, FName componentName, EControllerHand hand);
 
 	virtual void AddToScore_Implementation(int score) override;
 	virtual void SetScore_Implementation(int score) override;
