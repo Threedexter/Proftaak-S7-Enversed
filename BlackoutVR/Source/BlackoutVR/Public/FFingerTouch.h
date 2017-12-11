@@ -17,16 +17,16 @@ struct FFingerTouch
 public:
 
 	FFingerTouch() {}
-	FFingerTouch(ETouchIndex::Type fingerIndex, FVector& lastTouchedPosition, AActor* touchedActor, FVector2D& lastTouchedPositionScr)
+	FFingerTouch(ETouchIndex::Type fingerIndex, FVector& lastTouchedPosition, AActor* touchedActor, FVector2D& lastTouchedWidgetPosition)
 	{
 		this->fingerIndex = fingerIndex;
 		this->lastTouchedPosition = lastTouchedPosition;
-		this->lastTouchedPositionOnScreen = lastTouchedPositionScr;
+		this->lastTouchedWidgetPosition = lastTouchedWidgetPosition;
 		this->touchedActor = touchedActor;
 	}
 
 	ETouchIndex::Type fingerIndex;
 	FVector lastTouchedPosition;
-	FVector2D lastTouchedPositionOnScreen;
+	FVector2D lastTouchedWidgetPosition;
 	AActor* touchedActor;
 };
