@@ -31,6 +31,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Touch|Rotation")
 		USceneComponent* touchRotationReference;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Touch|Rotation")
+		FRotator originRotation = FRotator(-90.f, -90.f, 0.f);
+
 public:
 
 	AVRCapture2D(const FObjectInitializer& ObjectInitializer);
