@@ -310,6 +310,7 @@ AActor* ABlackoutVRCharacter::GetNearestActor(FVector worldLocation, float& leng
 			const float ttlength = temp.Size();
 			if (ttlength < tlength)
 			{
+				tlength = ttlength;
 				ret = a;
 			}
 		}
