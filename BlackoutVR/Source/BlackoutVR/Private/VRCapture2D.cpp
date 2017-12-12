@@ -37,19 +37,10 @@ void AVRCapture2D::ScreenToWorld(FVector2D touchPosition, FVector& worldLocation
 			, captureComp->GetViewState(0)->GetConcreteViewState()->PrevViewMatrices.GetInvProjectionMatrix(), worldLocation, worldDirection);
 
 		UE_LOG(LogTemp, Warning, TEXT("Before Rotation: %s"), *worldDirection.ToString())
-		touchRotationReference->SetRelativeRotation(FRotator(90, 0, 0));
-		FRotator rotation = touchRotationReference->GetComponentRotation();
-		UE_LOG(LogTemp, Warning, TEXT("Rotation: %s"), *rotation.ToString())
-		worldDirection = rotation.RotateVector(worldDirection);
+		FRotator origin = captureComp->GetComponentRotation() - originRotation;
+		UE_LOG(LogTemp, Warning, TEXT("Rotation: %s"), *origin.ToString())
+		worldDirection = origin.RotateVector(worldDirection);
 		UE_LOG(LogTemp, Warning, TEXT("After Rotation touch component: %s"), *worldDirection.ToString())
-
-		//worldDirection = FRotator(0, 0, -90).RotateVector(worldDirection);
-
-		//UE_LOG(LogTemp, Warning, TEXT("After Rotation roll adjustment: %s"), *worldDirection.ToString())
-
-		//worldDirection = captureComp->GetForwardVector().ToOrientationRotator().RotateVector(worldDirection);
-
-		UE_LOG(LogTemp, Warning, TEXT("After Rotation camera component forward vector: %s"), *worldDirection.ToString())
 #else
 		FSceneView::DeprojectScreenToWorld(touchPosition, FIntRect(0, captureComp->TextureTarget->SizeY, captureComp->TextureTarget->SizeX, 0)
 			, captureComp->GetViewState(0)->GetConcreteViewState()->PrevViewMatrices.GetInvProjectionMatrix(), worldLocation, worldDirection);
