@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Pawn.h"
 #include "TouchActor.h"
 #include "ScoreKeeper.h"
 #include "Components/BoxComponent.h"
+#include "GameFramework/Character.h"
 #include "TouchPawn.generated.h"
 
 UCLASS()
-class BLACKOUTVR_API ATouchPawn : public APawn, public ITouchActor, public IScoreKeeper
+class BLACKOUTVR_API ATouchPawn : public ACharacter, public ITouchActor, public IScoreKeeper
 {
 	GENERATED_BODY()
 
@@ -29,7 +29,7 @@ public:
 
 public:
 	// Sets default values for this pawn's properties
-	ATouchPawn();
+	ATouchPawn(const FObjectInitializer& ObjectInitializer);
 
 protected:
 	// Called when the game starts or when spawned
