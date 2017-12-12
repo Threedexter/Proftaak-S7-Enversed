@@ -6,6 +6,10 @@
 #include "TouchActor.h"
 #include "BlackoutVRCharacter.h"
 
+// Cache
+static TArray<AActor*> VRPlayers;
+static TArray<AActor*> TouchActors;
+
 TArray<AActor*> UScoreSystem::GetVRPlayers()
 {
 	if (VRPlayers.Num() == 0) {

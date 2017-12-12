@@ -3,7 +3,7 @@
 #include "BlackoutVRCharacter.h"
 #include <string>
 #include "TouchScreenHandler.h"
-
+#include "ScoreSystem.h"
 
 
 ABlackoutVRCharacter::ABlackoutVRCharacter()
@@ -53,12 +53,25 @@ void ABlackoutVRCharacter::TouchEnter(ETouchIndex::Type fingerIndex, FVector tou
 	if (endGame) return;
 
 	AActor* actor;
-	FVector hitLocation;
+	FVector hitLocation; 
+	float length;
+
 	if (CheckIfTouchedActor(FVector2D(touchLocation.X, touchLocation.Y), hitLocation, actor))
 	{
 		if (!CheckActorBeenTouched(actor))
 		{
 			AddFingerTouchToArray(fingerIndex, hitLocation, actor);
+		}
+	} 
+	else if ((actor = GetNearestActor(hitLocation, length)) != nullptr) 
+	{
+		if (!CheckActorBeenTouched(actor))
+		{
+			// check if distance is not too far
+			if (length <= touchDistance)
+			{
+				AddFingerTouchToArray(fingerIndex, hitLocation, actor);
+			}
 		}
 	}
 }
@@ -270,6 +283,40 @@ bool ABlackoutVRCharacter::TouchTrace(FVector2D touchLocation, FHitResult& hit)
 	colResponseParams.CollisionResponse.SetAllChannels(ECollisionResponse::ECR_Block);
 	return GetWorld()->LineTraceSingleByChannel(hit, spec->GetActorLocation(), 
 		spec->GetActorLocation() - (worldDirection * rayDistance), ECollisionChannel::ECC_Visibility, params, colResponseParams);
+}
+
+AActor* ABlackoutVRCharacter::GetNearestActor(FVector worldLocation, float& length)
+{
+	TArray<AActor*> actors = UScoreSystem::GetTouchActors();
+
+	// we don't care about height
+	worldLocation.Z = 0;
+
+	AActor* ret = nullptr;
+	float tlength = 0;
+
+	for (AActor* a : actors)
+	{
+		FVector temp = a->GetActorLocation();
+		if (tlength == 0)
+		{
+			temp.Z = 0;
+			tlength = temp.Size();
+			ret = a;
+		} else
+		{
+			// check distance, ignore height
+			temp.Z = 0;
+			const float ttlength = temp.Size();
+			if (ttlength < tlength)
+			{
+				tlength = ttlength;
+				ret = a;
+			}
+		}
+	}
+	length = tlength;
+	return ret;
 }
 
 void ABlackoutVRCharacter::SetScore_Implementation(int score)

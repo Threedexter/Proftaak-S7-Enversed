@@ -48,6 +48,9 @@ public:
 	UPROPERTY(BlueprintAssignable)
 		FUpdateTouchPosition onTouchUpdate;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Game|Touch")
+		float touchDistance = 50;
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Game")
 		bool endGame = false;
 
@@ -92,8 +95,11 @@ public:
 	void TouchMoved(ETouchIndex::Type fingerIndex, FVector touchLocation);
 	void TouchExit(ETouchIndex::Type fingerIndex, FVector touchLocation);
 
-	UFUNCTION(BlueprintCallable, Category="Touch|Trace")
+	UFUNCTION(BlueprintCallable, Category = "Touch|Trace")
 	bool TouchTrace(FVector2D touchLocation, FHitResult& hit);
+
+	UFUNCTION(BlueprintCallable, Category = "Touch|World")
+	AActor* GetNearestActor(FVector worldLocation, float& length);
 
 	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
 	bool CheckIfTouchedActor(FVector2D touchLocation, FVector& hitLocation, AActor*& actor);
