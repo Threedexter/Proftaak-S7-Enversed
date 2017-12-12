@@ -53,7 +53,7 @@ void ABlackoutVRCharacter::TouchEnter(ETouchIndex::Type fingerIndex, FVector tou
 	if (endGame) return;
 
 	AActor* actor;
-	FVector hitLocation; 
+	FVector hitLocation;
 	float length;
 
 	if (CheckIfTouchedActor(FVector2D(touchLocation.X, touchLocation.Y), hitLocation, actor))
@@ -62,8 +62,8 @@ void ABlackoutVRCharacter::TouchEnter(ETouchIndex::Type fingerIndex, FVector tou
 		{
 			AddFingerTouchToArray(fingerIndex, hitLocation, actor);
 		}
-	} 
-	else if ((actor = GetNearestActor(hitLocation, length)) != nullptr) 
+	}
+	else if ((actor = GetNearestActor(hitLocation, length)) != nullptr)
 	{
 		if (!CheckActorBeenTouched(actor))
 		{
@@ -79,16 +79,16 @@ void ABlackoutVRCharacter::TouchEnter(ETouchIndex::Type fingerIndex, FVector tou
 void ABlackoutVRCharacter::TouchMoved(ETouchIndex::Type fingerIndex, FVector touchLocation)
 {
 	lastTouchLocation = FVector2D(touchLocation.X, touchLocation.Y);
-	onTouchUpdate.Broadcast(FVector2D(touchLocation.X, touchLocation.Y),false);
+	onTouchUpdate.Broadcast(FVector2D(touchLocation.X, touchLocation.Y), false);
 	if (endGame) return;
-	
+
 	for (FFingerTouch& touchStruct : touchStructs)
 	{
 		if (touchStruct.fingerIndex == fingerIndex && currentSpecCam)
 		{
 			FVector2D widgetTouchLocation;
 			FHitResult hitLocation;
-			if (currentSpecCam->CheckIfTouchedWidgetFromCamera(FVector2D(touchLocation.X, touchLocation.Y), rayDistance, widgetTouchLocation, hitLocation)){
+			if (currentSpecCam->CheckIfTouchedWidgetFromCamera(FVector2D(touchLocation.X, touchLocation.Y), rayDistance, widgetTouchLocation, hitLocation)) {
 				touchStruct.lastTouchedWidgetPosition.X = widgetTouchLocation.X;
 				touchStruct.lastTouchedWidgetPosition.Y = widgetTouchLocation.Y;
 			}
@@ -97,7 +97,7 @@ void ABlackoutVRCharacter::TouchMoved(ETouchIndex::Type fingerIndex, FVector tou
 	}
 
 	FHitResult hit;
-	if(TouchTrace(FVector2D(touchLocation.X, touchLocation.Y), hit))
+	if (TouchTrace(FVector2D(touchLocation.X, touchLocation.Y), hit))
 	{
 		SetTouchedActorMovementLocation(fingerIndex, hit.Location);
 	}
@@ -114,7 +114,7 @@ void ABlackoutVRCharacter::TouchExit(ETouchIndex::Type fingerIndex, FVector touc
 	}
 
 	AActor* touchedActor = GetTouchedActor(fingerIndex);
-	if(touchedActor)
+	if (touchedActor)
 	{
 		ITouchActor::Execute_StopActorMovement(touchedActor);
 	}
@@ -127,9 +127,9 @@ bool ABlackoutVRCharacter::CheckIfTouchedActor(FVector2D touchLocation, FVector&
 	FHitResult hit;
 	if (TouchTrace(touchLocation, hit))
 	{
+		hitLocation = hit.Location;
 		if (hit.GetActor() && hit.GetActor()->GetClass()->ImplementsInterface(UTouchActor::StaticClass()))
 		{
-			hitLocation = hit.Location;
 			actor = hit.GetActor();
 			return true;
 		}
@@ -139,9 +139,9 @@ bool ABlackoutVRCharacter::CheckIfTouchedActor(FVector2D touchLocation, FVector&
 
 bool ABlackoutVRCharacter::HasTouchedActor(ETouchIndex::Type fingerIndex)
 {
-	for(FFingerTouch touchStruct : touchStructs)
+	for (FFingerTouch touchStruct : touchStructs)
 	{
-		if(touchStruct.fingerIndex == fingerIndex && touchStruct.touchedActor)
+		if (touchStruct.fingerIndex == fingerIndex && touchStruct.touchedActor)
 		{
 			return true;
 		}
@@ -181,9 +181,9 @@ void ABlackoutVRCharacter::RemoveTouchFromArray(ETouchIndex::Type fingerIndex)
 
 AActor * ABlackoutVRCharacter::GetTouchedActor(ETouchIndex::Type fingerIndex)
 {
-	for(FFingerTouch touchStruct : touchStructs)
+	for (FFingerTouch touchStruct : touchStructs)
 	{
-		if(touchStruct.fingerIndex == fingerIndex)
+		if (touchStruct.fingerIndex == fingerIndex)
 		{
 			return touchStruct.touchedActor;
 		}
@@ -193,12 +193,12 @@ AActor * ABlackoutVRCharacter::GetTouchedActor(ETouchIndex::Type fingerIndex)
 
 void ABlackoutVRCharacter::SetTouchedActorMovementLocation(ETouchIndex::Type fingerIndex, FVector hitLocation)
 {
-	for(FFingerTouch touchStruct : touchStructs)
+	for (FFingerTouch touchStruct : touchStructs)
 	{
-		if(touchStruct.fingerIndex == fingerIndex)
+		if (touchStruct.fingerIndex == fingerIndex)
 		{
 			touchStruct.lastTouchedPosition = hitLocation;
-			if(touchStruct.touchedActor)
+			if (touchStruct.touchedActor)
 			{
 				ITouchActor::Execute_SetMoveActorLocation(touchStruct.touchedActor, hitLocation);
 			}
@@ -211,7 +211,7 @@ FVector2D ABlackoutVRCharacter::GetLastTouchLocation()
 	return lastTouchLocation;
 }
 
-void ABlackoutVRCharacter::CreateAndAttachMotionController(UMotionControllerComponent* motionController , FName componentName, EControllerHand hand)
+void ABlackoutVRCharacter::CreateAndAttachMotionController(UMotionControllerComponent* motionController, FName componentName, EControllerHand hand)
 {
 	motionController = CreateDefaultSubobject<UMotionControllerComponent>(componentName);
 	motionController->bAutoActivate = true;
@@ -242,7 +242,7 @@ FVector2D ABlackoutVRCharacter::GetTouchLocation_Implementation(int playerID)
 		// return current finger touch on screen
 		return touched->lastTouchedWidgetPosition;
 	}
-	else return FVector2D(-1,-1);
+	else return FVector2D(-1, -1);
 }
 void ABlackoutVRCharacter::StopDrag_Implementation(AActor* actor)
 {
@@ -281,43 +281,49 @@ bool ABlackoutVRCharacter::TouchTrace(FVector2D touchLocation, FHitResult& hit)
 
 	FCollisionResponseParams colResponseParams;
 	colResponseParams.CollisionResponse.SetAllChannels(ECollisionResponse::ECR_Block);
-	return GetWorld()->LineTraceSingleByChannel(hit, spec->GetActorLocation(), 
+	return GetWorld()->LineTraceSingleByChannel(hit, spec->GetActorLocation(),
 		spec->GetActorLocation() - (worldDirection * rayDistance), ECollisionChannel::ECC_Visibility, params, colResponseParams);
 }
 
+#pragma optimize("", off)
 AActor* ABlackoutVRCharacter::GetNearestActor(FVector worldLocation, float& length)
 {
-	TArray<AActor*> actors = UScoreSystem::GetTouchActors();
+	TArray<AActor*> actors = UScoreSystem::GetTouchActors(GetWorld());
 
 	// we don't care about height
 	worldLocation.Z = 0;
 
 	AActor* ret = nullptr;
 	float tlength = 0;
+	FVector temp;
 
 	for (AActor* a : actors)
 	{
-		FVector temp = a->GetActorLocation();
-		if (tlength == 0)
+		if (a != nullptr)
 		{
+			temp = a->GetActorLocation();
 			temp.Z = 0;
-			tlength = temp.Size();
-			ret = a;
-		} else
-		{
-			// check distance, ignore height
-			temp.Z = 0;
-			const float ttlength = temp.Size();
-			if (ttlength < tlength)
+			if (tlength == 0)
 			{
-				tlength = ttlength;
+				tlength = FVector::Dist(worldLocation, temp);
 				ret = a;
+			}
+			else
+			{
+				// check distance, ignore height
+				float ttlength = FVector::Dist(worldLocation, temp);
+				if (ttlength < tlength)
+				{
+					tlength = ttlength;
+					ret = a;
+				}
 			}
 		}
 	}
 	length = tlength;
 	return ret;
 }
+#pragma optimize("", on)
 
 void ABlackoutVRCharacter::SetScore_Implementation(int score)
 {
@@ -340,5 +346,5 @@ FString ABlackoutVRCharacter::GetCName_Implementation()
 }
 void ABlackoutVRCharacter::SetCName_Implementation(int name)
 {
-	Name = TEXT("P%d"),name;
+	Name = TEXT("P%d"), name;
 }

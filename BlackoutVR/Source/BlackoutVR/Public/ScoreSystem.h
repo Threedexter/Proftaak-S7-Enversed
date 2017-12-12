@@ -17,22 +17,22 @@ class BLACKOUTVR_API UScoreSystem : public UBlueprintFunctionLibrary
 	
 public :
 	// Returns all the VR players
-	static TArray<AActor*> GetVRPlayers();
+	static TArray<AActor*> GetVRPlayers(UWorld* world);
 
 	// Returns all the touch actors
-	static TArray<AActor*> GetTouchActors();
+	static TArray<AActor*> GetTouchActors(UWorld* world);
 
 	// Gets all the scores
-	static TArray<FScoreData*> GetAllScores();
+	static TArray<FScoreData*> GetAllScores(UWorld* world);
 
 	// Gets all the touch scores
-	static TArray<FScoreData*> GetTouchScores();
+	static TArray<FScoreData*> GetTouchScores(UWorld* world);
 
 	// Gets the winner of the touch players
-	static FScoreData* GetTouchWinner();
+	static FScoreData* GetTouchWinner(UWorld* world);
 
 	// Gets the winner of all players
-	static FScoreData* GetWinner();
+	static FScoreData* GetWinner(UWorld* world);
 };
 
 USTRUCT(BlueprintType)

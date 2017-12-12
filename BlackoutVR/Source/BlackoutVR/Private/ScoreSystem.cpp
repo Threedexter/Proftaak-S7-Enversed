@@ -10,27 +10,27 @@
 static TArray<AActor*> VRPlayers;
 static TArray<AActor*> TouchActors;
 
-TArray<AActor*> UScoreSystem::GetVRPlayers()
+TArray<AActor*> UScoreSystem::GetVRPlayers(UWorld* world)
 {
 	if (VRPlayers.Num() == 0) {
-		UGameplayStatics::GetAllActorsWithInterface(GEngine->GetWorld(), ABlackoutVRCharacter::StaticClass(), VRPlayers);
+		UGameplayStatics::GetAllActorsWithInterface(world, ABlackoutVRCharacter::StaticClass(), VRPlayers);
 	}
 	return VRPlayers;
 }
 
-TArray<AActor*> UScoreSystem::GetTouchActors()
+TArray<AActor*> UScoreSystem::GetTouchActors(UWorld* world)
 {
 	if (TouchActors.Num() == 0) {
-		UGameplayStatics::GetAllActorsWithInterface(GEngine->GetWorld(), UTouchActor::StaticClass(), TouchActors);
+		UGameplayStatics::GetAllActorsWithInterface(world, UTouchActor::StaticClass(), TouchActors);
 	}
 	return TouchActors;
 }
 
-TArray<FScoreData*> UScoreSystem::GetAllScores()
+TArray<FScoreData*> UScoreSystem::GetAllScores(UWorld* world)
 {
 	// get all
-	TArray<AActor*> vr = GetVRPlayers();
-	TArray<AActor*> to = GetTouchActors();
+	TArray<AActor*> vr = GetVRPlayers(world);
+	TArray<AActor*> to = GetTouchActors(world);
 
 	// create array with all
 	to.Append(vr);
@@ -45,9 +45,9 @@ TArray<FScoreData*> UScoreSystem::GetAllScores()
 	return ret;
 }
 
-TArray<FScoreData*> UScoreSystem::GetTouchScores()
+TArray<FScoreData*> UScoreSystem::GetTouchScores(UWorld* world)
 {
-	TArray<AActor*> to = GetTouchActors();
+	TArray<AActor*> to = GetTouchActors(world);
 	TArray<FScoreData*> ret = TArray<FScoreData*>();
 	for (AActor* scoreKeeper : to)
 	{
@@ -59,9 +59,9 @@ TArray<FScoreData*> UScoreSystem::GetTouchScores()
 	return ret;
 }
 
-FScoreData* UScoreSystem::GetTouchWinner()
+FScoreData* UScoreSystem::GetTouchWinner(UWorld* world)
 {
-	TArray<FScoreData*> scores = GetTouchScores();
+	TArray<FScoreData*> scores = GetTouchScores(world);
 
 	FScoreData* highest_score = nullptr;
 	for (FScoreData *score : scores)
@@ -75,9 +75,9 @@ FScoreData* UScoreSystem::GetTouchWinner()
 	return highest_score;
 }
 
-FScoreData* UScoreSystem::GetWinner()
+FScoreData* UScoreSystem::GetWinner(UWorld* world)
 {
-	TArray<FScoreData*> scores = GetAllScores();
+	TArray<FScoreData*> scores = GetAllScores(world);
 
 	FScoreData* highest_score = nullptr;
 	for (FScoreData *score : scores)
