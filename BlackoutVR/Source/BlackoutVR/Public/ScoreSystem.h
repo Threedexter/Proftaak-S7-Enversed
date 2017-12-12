@@ -15,27 +15,24 @@ class BLACKOUTVR_API UScoreSystem : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 	
+public :
 	// Returns all the VR players
-	TArray<AActor*> GetVRPlayers();
+	static TArray<AActor*> GetVRPlayers();
 
 	// Returns all the touch actors
-	TArray<AActor*> GetTouchActors();
+	static TArray<AActor*> GetTouchActors();
 
 	// Gets all the scores
-	TArray<FScoreData*> GetAllScores();
+	static TArray<FScoreData*> GetAllScores();
 
 	// Gets all the touch scores
-	TArray<FScoreData*> GetTouchScores();
+	static TArray<FScoreData*> GetTouchScores();
 
 	// Gets the winner of the touch players
-	FScoreData* GetTouchWinner();
+	static FScoreData* GetTouchWinner();
 
 	// Gets the winner of all players
-	FScoreData* GetWinner();
-
-	// Cache
-	TArray<AActor*> VRPlayers;
-	TArray<AActor*> TouchActors;
+	static FScoreData* GetWinner();
 };
 
 USTRUCT(BlueprintType)
