@@ -31,20 +31,12 @@ void AVRCapture2D::ScreenToWorld(FVector2D touchPosition, FVector& worldLocation
 {
 	USceneCaptureComponent2D* captureComp = GetCaptureComponent2D();
 	if (captureComp) {
-#if  WITH_EDITOR
 		FVector2D touchScreenSize = TouchScreenHandler::GetGameSize();
 		FSceneView::DeprojectScreenToWorld(touchPosition, FIntRect(touchScreenSize.X, 0, 0, touchScreenSize.Y)
 			, captureComp->GetViewState(0)->GetConcreteViewState()->PrevViewMatrices.GetInvProjectionMatrix(), worldLocation, worldDirection);
-
-		UE_LOG(LogTemp, Warning, TEXT("Before Rotation: %s"), *worldDirection.ToString())
-		FRotator origin = captureComp->GetComponentRotation() - originRotation;
-		UE_LOG(LogTemp, Warning, TEXT("Rotation: %s"), *origin.ToString())
-		worldDirection = origin.RotateVector(worldDirection);
-		UE_LOG(LogTemp, Warning, TEXT("After Rotation touch component: %s"), *worldDirection.ToString())
-#else
-		FSceneView::DeprojectScreenToWorld(touchPosition, FIntRect(0, captureComp->TextureTarget->SizeY, captureComp->TextureTarget->SizeX, 0)
-			, captureComp->GetViewState(0)->GetConcreteViewState()->PrevViewMatrices.GetInvProjectionMatrix(), worldLocation, worldDirection);
-#endif
+		
+		worldDirection = originRotation.RotateVector(worldDirection);
+		worldDirection = captureComp->GetComponentRotation().RotateVector(worldDirection);
 	}
 }
 
