@@ -74,10 +74,6 @@ Saved/*
 BlackoutPrototype/Saved/*
 BlackoutVR/Saved/*
 
-#Don't ignore the config files in Saved
-!BlackoutPrototype/Saved/Config/*
-!BlackoutVR/Saved/Config/*
-
 # Compiled source files for the engine to use
 Intermediate/*
 BlackoutPrototype/Intermediate/*
