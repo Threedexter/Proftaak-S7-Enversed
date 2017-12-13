@@ -11,9 +11,11 @@
 class BLACKOUTVR_API TouchScreenHandler
 {
 public:
-	HWND GetGameHandler(unsigned long process_id);
-	static BOOL CALLBACK EnumWindowsCallback(HWND handle, LPARAM lParam);
-	static BOOL IsMainWindow(HWND handle);
 	TouchScreenHandler();
+	static FVector2D GetGameSize();
 	~TouchScreenHandler();
+
+private:
+	LRESULT WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+	void KillTouch();
 };

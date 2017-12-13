@@ -3,19 +3,25 @@
 #define STRICT
 #include "TouchScreenHandler.h"
 #include <windows.h>
-#include <ole2.h>
 
-struct HD {
-	unsigned long process_id;
-	HWND best_handle;
-};
+static bool killedTouch;
+
+#define WM_EXITSIZEMOVE                 0x0232
 
 TouchScreenHandler::TouchScreenHandler()
 {
-	HWND hwnd = GetGameHandler(GetCurrentProcessId());
+#if(WINVER >= 0x0602)
+	if (!killedTouch)
+	{
+		KillTouch();
+	}
+}
+
+void TouchScreenHandler::KillTouch()
+{
+	HWND hwnd = GetActiveWindow();
 	if (IsTouchWindow(hwnd, 0)) {
 		BOOL fEnabled = FALSE;
-		//#if(WINVER >= 0x0602)
 		SetWindowFeedbackSetting(hwnd,
 			FEEDBACK_TOUCH_CONTACTVISUALIZATION,
 			0, sizeof(fEnabled), &fEnabled);
@@ -31,34 +37,41 @@ TouchScreenHandler::TouchScreenHandler()
 		SetWindowFeedbackSetting(hwnd,
 			FEEDBACK_TOUCH_RIGHTTAP,
 			0, sizeof(fEnabled), &fEnabled);
-		//#endif
 	}
+#endif
 }
 
-HWND TouchScreenHandler::GetGameHandler(unsigned long process_id)
+FVector2D TouchScreenHandler::GetGameSize()
 {
-	HD data;
-	data.process_id = process_id;
-	data.best_handle = 0;
-	EnumWindows(EnumWindowsCallback, (LPARAM)&data);
-	return data.best_handle;
+	RECT rect = RECT();
+	HWND hwnd = GetActiveWindow();
+	GetClientRect(hwnd, &rect);
+
+	return FVector2D(rect.right, rect.bottom);
 }
 
-BOOL CALLBACK TouchScreenHandler::EnumWindowsCallback(HWND handle, LPARAM lParam)
+// attach in the future
+LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	HD& data = *(HD*)lParam;
-	unsigned long process_id = 0;
-	GetWindowThreadProcessId(handle, &process_id);
-	if (data.process_id != process_id || !IsMainWindow(handle)) {
-		return TRUE;
+	switch (uMsg)
+	{
+		//..
+	case WM_EXITSIZEMOVE :
+		{
+			// on stop resize
+			int width = LOWORD(lParam), height = HIWORD(lParam);
+			UE_LOG(LogTemp, Warning, TEXT("Resized to %d,%d"), width, height);
+		}
+	case WM_SIZE:
+		{
+			// on resize
+			int width = LOWORD(lParam), height = HIWORD(lParam);
+			UE_LOG(LogTemp, Warning, TEXT("Resizing to %d,%d"), width, height);
+		}
+		// ..
+		break;
 	}
-	data.best_handle = handle;
-	return FALSE;
-}
-
-BOOL TouchScreenHandler::IsMainWindow(HWND handle)
-{
-	return GetWindow(handle, GW_OWNER) == (HWND)0 && IsWindowVisible(handle);
+	return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
 TouchScreenHandler::~TouchScreenHandler()

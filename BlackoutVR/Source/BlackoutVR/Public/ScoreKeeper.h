@@ -33,4 +33,7 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Score")
 		FString GetCName();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Score")
+		void SetCName(int name);
 };

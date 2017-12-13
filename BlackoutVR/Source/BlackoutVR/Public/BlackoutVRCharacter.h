@@ -3,12 +3,19 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "SimpleChar/VRSimpleCharacter.h"
+#include "GameFramework/Character.h"
 #include "VRCapture2D.h"
 #include "TouchActor.h"
 #include "FFingerTouch.h"
 #include "ScoreKeeper.h"
 #include "TouchScreenHandler.h"
+#include "HeadMountedDisplay.h"
+#include "MotionControllerComponent.h"
+#include "Camera/CameraComponent.h"
+#include "IMotionController.h"
+#include "ITouchData.h"
+#include "Kismet/GameplayStatics.h"
+#include "ScoreSystem.h"
 #include "BlackoutVRCharacter.generated.h"
 
 /**
@@ -17,19 +24,13 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FUpdateTouchPosition, FVector2D, TouchLocation, bool, IsTouch);
 
 UCLASS()
-class BLACKOUTVR_API ABlackoutVRCharacter : public AVRSimpleCharacter, public IScoreKeeper
+class BLACKOUTVR_API ABlackoutVRCharacter : public ACharacter, public IScoreKeeper, public IITouchData
 {
 	
 
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Touch|Ray")
-		float raySpread = 1.65f;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Touch|Ray")
-		float rayOffset = 0.05f;
-
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Touch|Ray")
 		float rayDistance = 10000.f;
 
@@ -48,13 +49,31 @@ public:
 	UPROPERTY(BlueprintAssignable)
 		FUpdateTouchPosition onTouchUpdate;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Game|Touch")
+		float touchDistance = 50;
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Game")
 		bool endGame = false;
+
+	UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category = "Game")
+		bool gameStarted = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "Controller")
+		UMotionControllerComponent* LeftMotionController;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"),Category = "Controller")
+		UMotionControllerComponent* RightMotionController;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "VR|Camera")
+		UCameraComponent* Camera;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "VR|Component")
+		USceneComponent* VROrigin;
 
 private:
 		AVRCapture2D* currentSpecCam;
 		TouchScreenHandler touch_screen_handler;
-	
+		UScoreSystem actorHandler;
 public:
 
 	/**
@@ -83,8 +102,11 @@ public:
 	void TouchMoved(ETouchIndex::Type fingerIndex, FVector touchLocation);
 	void TouchExit(ETouchIndex::Type fingerIndex, FVector touchLocation);
 
-	UFUNCTION(BlueprintCallable, Category="Touch|Trace")
+	UFUNCTION(BlueprintCallable, Category = "Touch|Trace")
 	bool TouchTrace(FVector2D touchLocation, FHitResult& hit);
+
+	UFUNCTION(BlueprintCallable, Category = "Touch|World")
+	AActor* GetNearestActor(FVector worldLocation, float& length);
 
 	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
 	bool CheckIfTouchedActor(FVector2D touchLocation, FVector& hitLocation, AActor*& actor);
@@ -110,8 +132,13 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Touch|Location")
 	FVector2D GetLastTouchLocation();
 
+	void CreateAndAttachMotionController(UMotionControllerComponent* motionController, FName componentName, EControllerHand hand);
+
 	virtual void AddToScore_Implementation(int score) override;
 	virtual void SetScore_Implementation(int score) override;
 	virtual int GetScore_Implementation() override;
 	virtual FString GetCName_Implementation() override;
+	virtual void SetCName_Implementation(int name) override;
+	virtual FVector2D GetTouchLocation_Implementation(int playerID) override;
+	virtual void StopDrag_Implementation(AActor* actor) override;
 };

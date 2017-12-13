@@ -10,18 +10,8 @@
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
 				"Engine",
-				"VRExpansionPlugin"
+				"UMG"
 			]
-		}
-	],
-	"Plugins": [
-		{
-			"Name": "OpenVRExpansionPlugin",
-			"Enabled": true
-		},
-		{
-			"Name": "VRExpansionPlugin",
-			"Enabled": true
 		}
 	],
 	"TargetPlatforms": [

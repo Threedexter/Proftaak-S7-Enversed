@@ -10,32 +10,31 @@ struct FScoreData;
 /**
  * 
  */
-UCLASS()
-class BLACKOUTVR_API UScoreSystem : public UBlueprintFunctionLibrary
-{
-	GENERATED_BODY()
-	
+class BLACKOUTVR_API UScoreSystem
+{	
+public :
 	// Returns all the VR players
-	TArray<AActor*> GetVRPlayers();
+	TArray<AActor*> GetVRPlayers(UWorld* world);
 
 	// Returns all the touch actors
-	TArray<AActor*> GetTouchActors();
+	TArray<AActor*> GetTouchActors(UWorld* world);
 
 	// Gets all the scores
-	TArray<FScoreData*> GetAllScores();
+	TArray<FScoreData*> GetAllScores(UWorld* world);
 
 	// Gets all the touch scores
-	TArray<FScoreData*> GetTouchScores();
+	TArray<FScoreData*> GetTouchScores(UWorld* world);
 
 	// Gets the winner of the touch players
-	FScoreData* GetTouchWinner();
+	FScoreData* GetTouchWinner(UWorld* world);
 
 	// Gets the winner of all players
-	FScoreData* GetWinner();
+	FScoreData* GetWinner(UWorld* world);
 
-	// Cache
 	TArray<AActor*> VRPlayers;
 	TArray<AActor*> TouchActors;
+	UScoreSystem();
+	~UScoreSystem();
 };
 
 USTRUCT(BlueprintType)

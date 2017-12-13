@@ -8,9 +8,9 @@ public class BlackoutVR : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "AIModule" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		PrivateDependencyModuleNames.AddRange(new string[] { "HeadMountedDisplay" , "SteamVR" });
 		
         Definitions.Add("WINVER=0x0A00");  
         Definitions.Add("_WIN32_WINNT_WINBLUE=0x0A00");  
