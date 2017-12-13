@@ -15,6 +15,7 @@
 #include "IMotionController.h"
 #include "ITouchData.h"
 #include "Kismet/GameplayStatics.h"
+#include "ScoreSystem.h"
 #include "BlackoutVRCharacter.generated.h"
 
 /**
@@ -54,6 +55,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Game")
 		bool endGame = false;
 
+	UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category = "Game")
+		bool gameStarted = false;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "Controller")
 		UMotionControllerComponent* LeftMotionController;
 
@@ -66,7 +70,7 @@ public:
 private:
 		AVRCapture2D* currentSpecCam;
 		TouchScreenHandler touch_screen_handler;
-	
+		UScoreSystem actorHandler;
 public:
 
 	/**
