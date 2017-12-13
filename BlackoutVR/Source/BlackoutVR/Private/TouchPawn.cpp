@@ -42,6 +42,7 @@ void ATouchPawn::SetMoveActorLocation_Implementation(FVector moveLocation)
 {
 	AAIController* ai = Cast<AAIController>(GetController());
 	if (ai) {
+		ITouchActor::Execute_ActorStartedMoving(this);
 		ai->MoveToLocation(moveLocation, 10.0f, false, true, false, true, nullptr, true);
 	}
 }
@@ -51,6 +52,7 @@ void ATouchPawn::StopActorMovement_Implementation()
 	if(GetMovementComponent())
 	{
 		GetMovementComponent()->StopMovementImmediately();
+		ITouchActor::Execute_ActorStoppedMoving(this);
 	}
 }
 

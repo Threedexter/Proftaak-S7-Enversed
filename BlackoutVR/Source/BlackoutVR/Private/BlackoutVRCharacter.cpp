@@ -27,6 +27,7 @@ void ABlackoutVRCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	actorHandler = UScoreSystem();
 	touch_screen_handler = TouchScreenHandler();
 
 	if (GetSpectatorCam())
@@ -63,7 +64,7 @@ void ABlackoutVRCharacter::TouchEnter(ETouchIndex::Type fingerIndex, FVector tou
 			AddFingerTouchToArray(fingerIndex, hitLocation, actor);
 		}
 	}
-	else if ((actor = GetNearestActor(hitLocation, length)) != nullptr)
+	else if (gameStarted && (actor = GetNearestActor(hitLocation, length)) != nullptr)
 	{
 		if (!CheckActorBeenTouched(actor))
 		{
@@ -288,7 +289,7 @@ bool ABlackoutVRCharacter::TouchTrace(FVector2D touchLocation, FHitResult& hit)
 #pragma optimize("", off)
 AActor* ABlackoutVRCharacter::GetNearestActor(FVector worldLocation, float& length)
 {
-	TArray<AActor*> actors = UScoreSystem::GetTouchActors(GetWorld());
+	TArray<AActor*> actors = actorHandler.GetTouchActors(GetWorld());
 
 	// we don't care about height
 	worldLocation.Z = 0;
@@ -299,7 +300,7 @@ AActor* ABlackoutVRCharacter::GetNearestActor(FVector worldLocation, float& leng
 
 	for (AActor* a : actors)
 	{
-		if (a != nullptr)
+		if (a)
 		{
 			temp = a->GetActorLocation();
 			temp.Z = 0;

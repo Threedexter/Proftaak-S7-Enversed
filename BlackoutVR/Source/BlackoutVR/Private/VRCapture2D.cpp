@@ -33,7 +33,7 @@ void AVRCapture2D::ScreenToWorld(FVector2D touchPosition, FVector& worldLocation
 	if (captureComp) {
 #if  WITH_EDITOR
 		FVector2D touchScreenSize = TouchScreenHandler::GetGameSize();
-		FSceneView::DeprojectScreenToWorld(touchPosition, FIntRect(0, touchScreenSize.Y, touchScreenSize.X, 0)
+		FSceneView::DeprojectScreenToWorld(touchPosition, FIntRect(touchScreenSize.X, 0, 0, touchScreenSize.Y)
 			, captureComp->GetViewState(0)->GetConcreteViewState()->PrevViewMatrices.GetInvProjectionMatrix(), worldLocation, worldDirection);
 
 		UE_LOG(LogTemp, Warning, TEXT("Before Rotation: %s"), *worldDirection.ToString())
