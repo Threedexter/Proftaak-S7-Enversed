@@ -8,10 +8,15 @@
 
 ABlackoutVRCharacter::ABlackoutVRCharacter()
 {
+	VROrigin = CreateDefaultSubobject<USceneComponent>("VROrigin");
+	VROrigin->SetupAttachment(RootComponent);
 	Camera = CreateDefaultSubobject<UCameraComponent>("VRCamera");
-	Camera->SetupAttachment(RootComponent);
+	Camera->SetupAttachment(VROrigin);
+	Camera->bLockToHmd = true;
+	Camera->bUsePawnControlRotation = false;
 	CreateAndAttachMotionController(LeftMotionController, "LeftMotionController", EControllerHand::Left);
 	CreateAndAttachMotionController(RightMotionController, "RightMotionController", EControllerHand::Right);
+	
 }
 
 void ABlackoutVRCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -218,7 +223,9 @@ void ABlackoutVRCharacter::CreateAndAttachMotionController(UMotionControllerComp
 	motionController->bAutoActivate = true;
 	motionController->bAutoRegister = true;
 	motionController->Hand = hand;
-	motionController->SetupAttachment(Camera);
+	motionController->SetupAttachment(RootComponent);
+	motionController->SetWorldLocation(RootComponent->GetComponentLocation());
+	motionController->RelativeLocation = FVector(0, 0, 0);
 
 }
 
