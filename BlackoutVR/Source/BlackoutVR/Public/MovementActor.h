@@ -53,6 +53,8 @@ public:
 	virtual void StopActorMovement_Implementation() override;
 	virtual void ActorStoppedMoving_Implementation() override;
 	virtual void ActorStartedMoving_Implementation() override;
+	virtual int32 GetTouchActorID_Implementation() override;
+	virtual int32 SetTouchActorID_Implementation(int32 ID) override;
 
 	virtual void AddToScore_Implementation(int score) override;
 	virtual void SetScore_Implementation(int score) override;

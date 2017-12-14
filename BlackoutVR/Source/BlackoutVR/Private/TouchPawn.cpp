@@ -64,6 +64,16 @@ void ATouchPawn::ActorStartedMoving_Implementation()
 {
 }
 
+int32 ATouchPawn::GetTouchActorID_Implementation()
+{
+	return touchActorID;
+}
+
+int32 ATouchPawn::SetTouchActorID_Implementation(int32 ID)
+{
+	return touchActorID = ID;
+}
+
 
 void ATouchPawn::SetScore_Implementation(int score)
 {
