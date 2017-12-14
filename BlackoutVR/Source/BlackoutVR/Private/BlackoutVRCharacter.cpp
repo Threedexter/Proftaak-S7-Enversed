@@ -55,7 +55,7 @@ AVRCapture2D* ABlackoutVRCharacter::GetSpectatorCam()
 void ABlackoutVRCharacter::TouchEnter(ETouchIndex::Type fingerIndex, FVector touchLocation)
 {
 	lastTouchLocation = FVector2D(touchLocation.X, touchLocation.Y);
-	onTouchUpdate.Broadcast(FVector2D(touchLocation.X, touchLocation.Y), true);
+	onTouchBegin.Broadcast(FVector2D(touchLocation.X, touchLocation.Y), true);
 	if (endGame) return;
 
 	AActor* actor;
@@ -112,6 +112,7 @@ void ABlackoutVRCharacter::TouchMoved(ETouchIndex::Type fingerIndex, FVector tou
 void ABlackoutVRCharacter::TouchExit(ETouchIndex::Type fingerIndex, FVector touchLocation)
 {
 	lastTouchLocation = FVector2D(touchLocation.X, touchLocation.Y);
+	onTouchEnd.Broadcast(FVector2D(touchLocation.X, touchLocation.Y), true);
 	if (endGame) return;
 
 	if (!HasTouchedActor(fingerIndex))

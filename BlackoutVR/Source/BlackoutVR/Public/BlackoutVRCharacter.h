@@ -22,6 +22,8 @@
  * 
  */
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FUpdateTouchPosition, FVector2D, TouchLocation, bool, IsTouch);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FBeginTouchPosition, FVector2D, TouchLocation, bool, IsTouch);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FEndTouchPosition, FVector2D, TouchLocation, bool, IsTouch);
 
 UCLASS()
 class BLACKOUTVR_API ABlackoutVRCharacter : public ACharacter, public IScoreKeeper, public IITouchData
@@ -48,6 +50,12 @@ public:
 
 	UPROPERTY(BlueprintAssignable)
 		FUpdateTouchPosition onTouchUpdate;
+
+	UPROPERTY(BlueprintAssignable)
+		FBeginTouchPosition onTouchBegin;
+
+	UPROPERTY(BlueprintAssignable)
+		FEndTouchPosition onTouchEnd;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Game|Touch")
 		float touchDistance = 50;
