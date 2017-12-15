@@ -82,6 +82,7 @@ private:
 		AVRCapture2D* currentSpecCam;
 		TouchScreenHandler touch_screen_handler;
 		UScoreSystem actorHandler;
+		bool firstPress = true;
 public:
 
 	/**
@@ -120,13 +121,13 @@ public:
 	bool CheckIfTouchedActor(FVector2D touchLocation, FVector& hitLocation, AActor*& actor);
 
 	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
-	bool HasTouchedActor(ETouchIndex::Type fingerIndex);
-
-	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
 	bool CheckActorBeenTouched(AActor* actor);
 
 	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
 	void AddFingerTouchToArray(ETouchIndex::Type fingerIndex, FVector hitLocation, AActor* actor);
+
+	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
+	bool HasFingerIndex(ETouchIndex::Type fingerIndex);
 
 	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
 	void RemoveTouchFromArray(ETouchIndex::Type fingerIndex);
