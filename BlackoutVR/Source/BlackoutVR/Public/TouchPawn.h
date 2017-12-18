@@ -42,6 +42,11 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+
+	UFUNCTION(Server, Reliable, WithValidation)
+		void SetMoveActorServer(FVector moveLocation);
+
+	//interface functions
 	virtual void SetMoveActorLocation_Implementation(FVector moveLocation) override;
 	virtual void StopActorMovement_Implementation() override;
 	virtual void ActorStoppedMoving_Implementation() override;
