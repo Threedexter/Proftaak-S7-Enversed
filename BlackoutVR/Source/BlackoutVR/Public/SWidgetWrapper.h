@@ -22,7 +22,7 @@ public:
 	USWidgetWrapper();
 
 	UFUNCTION(BlueprintCallable, Category = "Widget")
-	bool SameWidget(UWidgetComponent* component);
+		bool SameWidget(UWidget* component);
 	~USWidgetWrapper();
 
 private:
