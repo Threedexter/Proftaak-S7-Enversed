@@ -8,6 +8,8 @@
 #include "TouchScreenHandler.h"
 #include "Runtime/Renderer/Private/ScenePrivate.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Widget.h"
+#include "SWidgetWrapper.h"
 
 
 AVRCapture2D::AVRCapture2D(const FObjectInitializer& ObjectInitializer)
@@ -75,9 +77,30 @@ bool AVRCapture2D::CheckIfTouchedWidgetCustom(FVector startLocation, FVector end
 bool AVRCapture2D::CheckIfTouchedWidgetFromCamera(FVector2D touchPosition, float rayDistance, FVector2D& touchLocationWidget,
 	FHitResult& touchLocationWorld)
 {
-	if (!widgetInteraction) return false;
+	return GetTouchedWidgetsFromCamera(touchPosition, rayDistance, touchLocationWidget, touchLocationWorld).Num() > 0;
+}
+
+
+TArray<USWidgetWrapper*> AVRCapture2D::GetTouchedWidgetsFromCamera(FVector2D touchPosition, float rayDistance, FVector2D& touchLocationWidget,
+	FHitResult& touchLocationWorld)
+{
+	TArray<USWidgetWrapper*> arr;
+
+	if (!widgetInteraction) return arr;
 	touchLocationWorld = RayCastWorld(touchPosition, rayDistance);
 	widgetInteraction->SetCustomHitResultAndUpdate(touchLocationWorld);
 	touchLocationWidget = widgetInteraction->Get2DHitLocation();
-	return widgetInteraction->IsOverFocusableWidget() || widgetInteraction->IsOverInteractableWidget();
+	if (widgetInteraction->IsOverFocusableWidget() || widgetInteraction->IsOverInteractableWidget())
+	{
+		TArray<TWeakPtr<SWidget>> wsarr = widgetInteraction->GetHoveredWidgetPath().Widgets;
+		for (int i = 0; i < wsarr.Num(); i++)
+		{
+			TWeakPtr<SWidget> ws = wsarr[i];
+			if (ws.IsValid()) 
+			{
+				arr.Add(new USWidgetWrapper(ws.Pin().Get()));
+			}
+		}
+	}
+	return arr;
 }
