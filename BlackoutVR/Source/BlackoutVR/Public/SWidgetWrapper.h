@@ -25,6 +25,9 @@ public:
 		bool SameWidget(UWidget* component);
 	~USWidgetWrapper();
 
+	void SetWidget(SWidget* widget);
+
 private:
 	SWidget* widget;
+
 };

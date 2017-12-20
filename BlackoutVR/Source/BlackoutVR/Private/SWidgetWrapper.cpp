@@ -13,38 +13,18 @@ USWidgetWrapper::USWidgetWrapper()
 
 bool USWidgetWrapper::SameWidget(UWidget* c)
 {
-	// visibility should match
-	if (!( // not
-		c->GetVisibility() == ESlateVisibility::Visible && this->widget->GetVisibility() == EVisibility::Visible // same
-		|| // or
-		c->GetVisibility() == ESlateVisibility::Collapsed && this->widget->GetVisibility() == EVisibility::Collapsed // same
-		|| // or
-		c->GetVisibility() == ESlateVisibility::Hidden && this->widget->GetVisibility() == EVisibility::Hidden // same
-		|| // or
-		c->GetVisibility() == ESlateVisibility::HitTestInvisible && this->widget->GetVisibility() == EVisibility::HitTestInvisible // same
-		|| // or
-		c->GetVisibility() == ESlateVisibility::SelfHitTestInvisible && this->widget->GetVisibility() == EVisibility::SelfHitTestInvisible // same
-		))
-	{
-		return false;
-	}
-	// X Y and Z should match
-	if (!(
-		this->widget->GetRenderTransform() == c->RenderTransform.ToSlateRenderTransform()
-		))
-	{
-		return false;
-	}
-	// Enabled should match
-	if (!(
-		this->widget->IsEnabled() != c->GetIsEnabled()
-		))
-	{
-		return false;
-	}
-	return true;
+	TSharedPtr<SWidget> MyWidget = c->GetCachedWidget();
+
+	if (!MyWidget.IsValid()) return false;
+
+	return MyWidget.Get() == this->widget;
 }
 
 USWidgetWrapper::~USWidgetWrapper()
 {
+}
+
+void USWidgetWrapper::SetWidget(SWidget* widget)
+{
+	this->widget = widget;
 }

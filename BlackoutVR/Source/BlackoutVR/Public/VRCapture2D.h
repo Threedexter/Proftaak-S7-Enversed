@@ -49,5 +49,5 @@ public:
 	bool CheckIfTouchedWidgetFromCamera(FVector2D touchPosition, float rayDistance, FVector2D& touchLocationWidget, FHitResult& touchLocationWorld);
 
 	UFUNCTION(BlueprintCallable, Category = "Screen")
-	TArray<USWidgetWrapper*> GetTouchedWidgetsFromCamera(FVector2D touchPosition, float rayDistance, FVector2D& touchLocationWidget, FHitResult& touchLocationWorld);
+	bool GetTouchedWidgetsFromCamera(FVector2D touchPosition, float rayDistance, FVector2D& touchLocationWidget, FHitResult& touchLocationWorld, TArray<USWidgetWrapper*>& widgetWrapper);
 };

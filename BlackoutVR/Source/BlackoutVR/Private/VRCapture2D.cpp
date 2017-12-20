@@ -74,33 +74,38 @@ bool AVRCapture2D::CheckIfTouchedWidgetCustom(FVector startLocation, FVector end
 	return widgetInteraction->IsOverFocusableWidget() || widgetInteraction->IsOverInteractableWidget();
 }
 
-bool AVRCapture2D::CheckIfTouchedWidgetFromCamera(FVector2D touchPosition, float rayDistance, FVector2D& touchLocationWidget,
-	FHitResult& touchLocationWorld)
+bool AVRCapture2D::CheckIfTouchedWidgetFromCamera(FVector2D touchPosition, float rayDistance,
+	FVector2D& touchLocationWidget, FHitResult& touchLocationWorld)
 {
-	return GetTouchedWidgetsFromCamera(touchPosition, rayDistance, touchLocationWidget, touchLocationWorld).Num() > 0;
+	TArray<USWidgetWrapper*> a;
+	return GetTouchedWidgetsFromCamera(touchPosition, rayDistance, touchLocationWidget, touchLocationWorld, a);
 }
 
-
-TArray<USWidgetWrapper*> AVRCapture2D::GetTouchedWidgetsFromCamera(FVector2D touchPosition, float rayDistance, FVector2D& touchLocationWidget,
-	FHitResult& touchLocationWorld)
+bool AVRCapture2D::GetTouchedWidgetsFromCamera(FVector2D touchPosition, float rayDistance,
+	FVector2D& touchLocationWidget, FHitResult& touchLocationWorld, TArray<USWidgetWrapper*>& widgets)
 {
-	TArray<USWidgetWrapper*> arr;
-
-	if (!widgetInteraction) return arr;
+	if (!widgetInteraction) return false;
 	touchLocationWorld = RayCastWorld(touchPosition, rayDistance);
 	widgetInteraction->SetCustomHitResultAndUpdate(touchLocationWorld);
 	touchLocationWidget = widgetInteraction->Get2DHitLocation();
-	if (widgetInteraction->IsOverFocusableWidget() || widgetInteraction->IsOverInteractableWidget())
+	bool isOverWidget = widgetInteraction->IsOverFocusableWidget() || widgetInteraction->IsOverInteractableWidget();
+	if (isOverWidget)
 	{
 		TArray<TWeakPtr<SWidget>> wsarr = widgetInteraction->GetHoveredWidgetPath().Widgets;
 		for (int i = 0; i < wsarr.Num(); i++)
 		{
 			TWeakPtr<SWidget> ws = wsarr[i];
-			if (ws.IsValid()) 
+			if (ws.IsValid())
 			{
-				arr.Add(new USWidgetWrapper(ws.Pin().Get()));
+				SWidget* widg = &(*ws.Pin());
+				if (widg) {
+					USWidgetWrapper* widgetWrapper = NewObject<USWidgetWrapper>();
+					widgetWrapper->SetWidget(widg);
+					widgets.Add(widgetWrapper);
+				}
 			}
 		}
 	}
-	return arr;
+	return isOverWidget;
 }
+
