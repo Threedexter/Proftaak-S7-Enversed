@@ -8,6 +8,8 @@
 #include "TouchScreenHandler.h"
 #include "Runtime/Renderer/Private/ScenePrivate.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Widget.h"
+#include "SWidgetWrapper.h"
 
 
 AVRCapture2D::AVRCapture2D(const FObjectInitializer& ObjectInitializer)
@@ -72,12 +74,38 @@ bool AVRCapture2D::CheckIfTouchedWidgetCustom(FVector startLocation, FVector end
 	return widgetInteraction->IsOverFocusableWidget() || widgetInteraction->IsOverInteractableWidget();
 }
 
-bool AVRCapture2D::CheckIfTouchedWidgetFromCamera(FVector2D touchPosition, float rayDistance, FVector2D& touchLocationWidget,
-	FHitResult& touchLocationWorld)
+bool AVRCapture2D::CheckIfTouchedWidgetFromCamera(FVector2D touchPosition, float rayDistance,
+	FVector2D& touchLocationWidget, FHitResult& touchLocationWorld)
+{
+	TArray<USWidgetWrapper*> a;
+	return GetTouchedWidgetsFromCamera(touchPosition, rayDistance, touchLocationWidget, touchLocationWorld, a);
+}
+
+bool AVRCapture2D::GetTouchedWidgetsFromCamera(FVector2D touchPosition, float rayDistance,
+	FVector2D& touchLocationWidget, FHitResult& touchLocationWorld, TArray<USWidgetWrapper*>& widgets)
 {
 	if (!widgetInteraction) return false;
 	touchLocationWorld = RayCastWorld(touchPosition, rayDistance);
 	widgetInteraction->SetCustomHitResultAndUpdate(touchLocationWorld);
 	touchLocationWidget = widgetInteraction->Get2DHitLocation();
-	return widgetInteraction->IsOverFocusableWidget() || widgetInteraction->IsOverInteractableWidget();
+	bool isOverWidget = widgetInteraction->IsOverFocusableWidget() || widgetInteraction->IsOverInteractableWidget();
+	if (isOverWidget)
+	{
+		TArray<TWeakPtr<SWidget>> wsarr = widgetInteraction->GetHoveredWidgetPath().Widgets;
+		for (int i = 0; i < wsarr.Num(); i++)
+		{
+			TWeakPtr<SWidget> ws = wsarr[i];
+			if (ws.IsValid())
+			{
+				SWidget* widg = &(*ws.Pin());
+				if (widg) {
+					USWidgetWrapper* widgetWrapper = NewObject<USWidgetWrapper>();
+					widgetWrapper->SetWidget(widg);
+					widgets.Add(widgetWrapper);
+				}
+			}
+		}
+	}
+	return isOverWidget;
 }
+

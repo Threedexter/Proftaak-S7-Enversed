@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Engine/SceneCapture2D.h"
 #include "SpectatorWidgetInteraction.h"
+#include "SWidgetWrapper.h"
 #include "VRCapture2D.generated.h"
 
 /**
@@ -43,7 +44,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Screen")
 	bool CheckIfTouchedWidgetCustom(FVector startLocation, FVector endLocation, float rayDistance, FVector2D& touchLocationWidget,FHitResult& touchLocationWorld);
-
+	
 	UFUNCTION(BlueprintCallable, Category = "Screen")
 	bool CheckIfTouchedWidgetFromCamera(FVector2D touchPosition, float rayDistance, FVector2D& touchLocationWidget, FHitResult& touchLocationWorld);
+
+	UFUNCTION(BlueprintCallable, Category = "Screen")
+	bool GetTouchedWidgetsFromCamera(FVector2D touchPosition, float rayDistance, FVector2D& touchLocationWidget, FHitResult& touchLocationWorld, TArray<USWidgetWrapper*>& widgetWrapper);
 };
