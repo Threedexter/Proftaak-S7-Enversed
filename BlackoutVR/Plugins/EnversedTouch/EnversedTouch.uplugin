@@ -1,0 +1,29 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "EnversedTouch",
+	"Description": "A plugin allowing for usage of a Touch Screen with VR",
+	"Category": "Touch",
+	"CreatedBy": "Tim Goes, Mathieu v Wunnik, Jesse Deij, Rowan Dings",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": true,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "EnversedTouch",
+			"Type": "Developer",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "SteamVR",
+			"Enabled": true
+		}
+	]
+}
