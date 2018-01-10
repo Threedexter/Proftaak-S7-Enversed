@@ -8,17 +8,75 @@
 #include "ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+struct FVector2D;
 struct FHitResult;
+class UWidgetWrapper;
 struct FVector;
 class AActor;
-struct FVector2D;
 class ATouchSpectatorCapture;
 #ifdef ENVERSEDTOUCH_TouchVRBaseCharacter_generated_h
 #error "TouchVRBaseCharacter.generated.h already included, missing '#pragma once' in TouchVRBaseCharacter.h"
 #endif
 #define ENVERSEDTOUCH_TouchVRBaseCharacter_generated_h
 
-#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_18_DELEGATE \
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_22_DELEGATE \
+struct _Script_EnversedTouch_eventEndTouchWidget_Parms \
+{ \
+	FVector2D touchWidgetLocation; \
+	FHitResult touchWorldHit; \
+	TArray<UWidgetWrapper*> widgets; \
+	bool hitWidget; \
+}; \
+static inline void FEndTouchWidget_DelegateWrapper(const FMulticastScriptDelegate& EndTouchWidget, FVector2D touchWidgetLocation, FHitResult touchWorldHit, const TArray<UWidgetWrapper*>& widgets, bool hitWidget) \
+{ \
+	_Script_EnversedTouch_eventEndTouchWidget_Parms Parms; \
+	Parms.touchWidgetLocation=touchWidgetLocation; \
+	Parms.touchWorldHit=touchWorldHit; \
+	Parms.widgets=widgets; \
+	Parms.hitWidget=hitWidget ? true : false; \
+	EndTouchWidget.ProcessMulticastDelegate<UObject>(&Parms); \
+}
+
+
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_21_DELEGATE \
+struct _Script_EnversedTouch_eventUpdateTouchWidget_Parms \
+{ \
+	FVector2D touchWidgetLocation; \
+	FHitResult touchWorldHit; \
+	TArray<UWidgetWrapper*> widgets; \
+	bool hitWidget; \
+}; \
+static inline void FUpdateTouchWidget_DelegateWrapper(const FMulticastScriptDelegate& UpdateTouchWidget, FVector2D touchWidgetLocation, FHitResult touchWorldHit, const TArray<UWidgetWrapper*>& widgets, bool hitWidget) \
+{ \
+	_Script_EnversedTouch_eventUpdateTouchWidget_Parms Parms; \
+	Parms.touchWidgetLocation=touchWidgetLocation; \
+	Parms.touchWorldHit=touchWorldHit; \
+	Parms.widgets=widgets; \
+	Parms.hitWidget=hitWidget ? true : false; \
+	UpdateTouchWidget.ProcessMulticastDelegate<UObject>(&Parms); \
+}
+
+
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_20_DELEGATE \
+struct _Script_EnversedTouch_eventBeginTouchWidget_Parms \
+{ \
+	FVector2D touchWidgetLocation; \
+	FHitResult touchWorldHit; \
+	TArray<UWidgetWrapper*> widgets; \
+	bool hitWidget; \
+}; \
+static inline void FBeginTouchWidget_DelegateWrapper(const FMulticastScriptDelegate& BeginTouchWidget, FVector2D touchWidgetLocation, FHitResult touchWorldHit, const TArray<UWidgetWrapper*>& widgets, bool hitWidget) \
+{ \
+	_Script_EnversedTouch_eventBeginTouchWidget_Parms Parms; \
+	Parms.touchWidgetLocation=touchWidgetLocation; \
+	Parms.touchWorldHit=touchWorldHit; \
+	Parms.widgets=widgets; \
+	Parms.hitWidget=hitWidget ? true : false; \
+	BeginTouchWidget.ProcessMulticastDelegate<UObject>(&Parms); \
+}
+
+
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_19_DELEGATE \
 struct _Script_EnversedTouch_eventEndTouchWorldPosition_Parms \
 { \
 	FHitResult touchHitResult; \
@@ -33,7 +91,7 @@ static inline void FEndTouchWorldPosition_DelegateWrapper(const FMulticastScript
 }
 
 
-#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_17_DELEGATE \
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_18_DELEGATE \
 struct _Script_EnversedTouch_eventBeginTouchWorldPosition_Parms \
 { \
 	FHitResult touchHitResult; \
@@ -48,7 +106,7 @@ static inline void FBeginTouchWorldPosition_DelegateWrapper(const FMulticastScri
 }
 
 
-#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_16_DELEGATE \
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_17_DELEGATE \
 struct _Script_EnversedTouch_eventUpdateTouchWorldPosition_Parms \
 { \
 	FHitResult touchHitResult; \
@@ -63,7 +121,7 @@ static inline void FUpdateTouchWorldPosition_DelegateWrapper(const FMulticastScr
 }
 
 
-#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_15_DELEGATE \
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_16_DELEGATE \
 struct _Script_EnversedTouch_eventEndTouchActor_Parms \
 { \
 	AActor* touchActor; \
@@ -78,7 +136,7 @@ static inline void FEndTouchActor_DelegateWrapper(const FMulticastScriptDelegate
 }
 
 
-#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_14_DELEGATE \
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_15_DELEGATE \
 struct _Script_EnversedTouch_eventUpdateTouchActor_Parms \
 { \
 	AActor* touchActor; \
@@ -93,7 +151,7 @@ static inline void FUpdateTouchActor_DelegateWrapper(const FMulticastScriptDeleg
 }
 
 
-#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_13_DELEGATE \
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_14_DELEGATE \
 struct _Script_EnversedTouch_eventBeginTouchActor_Parms \
 { \
 	AActor* touchActor; \
@@ -108,7 +166,7 @@ static inline void FBeginTouchActor_DelegateWrapper(const FMulticastScriptDelega
 }
 
 
-#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_12_DELEGATE \
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_13_DELEGATE \
 struct _Script_EnversedTouch_eventEndTouchScreenPosition_Parms \
 { \
 	FVector2D touchLocation; \
@@ -123,7 +181,7 @@ static inline void FEndTouchScreenPosition_DelegateWrapper(const FMulticastScrip
 }
 
 
-#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_11_DELEGATE \
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_12_DELEGATE \
 struct _Script_EnversedTouch_eventBeginTouchScreenPosition_Parms \
 { \
 	FVector2D touchLocation; \
@@ -138,7 +196,7 @@ static inline void FBeginTouchScreenPosition_DelegateWrapper(const FMulticastScr
 }
 
 
-#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_10_DELEGATE \
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_11_DELEGATE \
 struct _Script_EnversedTouch_eventUpdateTouchScreenPosition_Parms \
 { \
 	FVector2D touchLocation; \
@@ -153,7 +211,42 @@ static inline void FUpdateTouchScreenPosition_DelegateWrapper(const FMulticastSc
 }
 
 
-#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_26_RPC_WRAPPERS \
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_41_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execCheckActorBeenTouched) \
+	{ \
+		P_GET_OBJECT(AActor,Z_Param_actor); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(bool*)Z_Param__Result=this->CheckActorBeenTouched(Z_Param_actor); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execHasFingerIndex) \
+	{ \
+		P_GET_PROPERTY(UByteProperty,Z_Param_fingerIndex); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(bool*)Z_Param__Result=this->HasFingerIndex(ETouchIndex::Type(Z_Param_fingerIndex)); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execGetLastTouchLocation) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(FVector2D*)Z_Param__Result=this->GetLastTouchLocation(); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execGetTouchedActor) \
+	{ \
+		P_GET_PROPERTY(UByteProperty,Z_Param_fingerIndex); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(AActor**)Z_Param__Result=this->GetTouchedActor(ETouchIndex::Type(Z_Param_fingerIndex)); \
+		P_NATIVE_END; \
+	} \
  \
 	DECLARE_FUNCTION(execGetSpectatorCam) \
 	{ \
@@ -164,7 +257,42 @@ static inline void FUpdateTouchScreenPosition_DelegateWrapper(const FMulticastSc
 	}
 
 
-#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_26_RPC_WRAPPERS_NO_PURE_DECLS \
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_41_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execCheckActorBeenTouched) \
+	{ \
+		P_GET_OBJECT(AActor,Z_Param_actor); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(bool*)Z_Param__Result=this->CheckActorBeenTouched(Z_Param_actor); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execHasFingerIndex) \
+	{ \
+		P_GET_PROPERTY(UByteProperty,Z_Param_fingerIndex); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(bool*)Z_Param__Result=this->HasFingerIndex(ETouchIndex::Type(Z_Param_fingerIndex)); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execGetLastTouchLocation) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(FVector2D*)Z_Param__Result=this->GetLastTouchLocation(); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execGetTouchedActor) \
+	{ \
+		P_GET_PROPERTY(UByteProperty,Z_Param_fingerIndex); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(AActor**)Z_Param__Result=this->GetTouchedActor(ETouchIndex::Type(Z_Param_fingerIndex)); \
+		P_NATIVE_END; \
+	} \
  \
 	DECLARE_FUNCTION(execGetSpectatorCam) \
 	{ \
@@ -175,7 +303,7 @@ static inline void FUpdateTouchScreenPosition_DelegateWrapper(const FMulticastSc
 	}
 
 
-#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_26_INCLASS_NO_PURE_DECLS \
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_41_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesATouchVRBaseCharacter(); \
 	friend ENVERSEDTOUCH_API class UClass* Z_Construct_UClass_ATouchVRBaseCharacter(); \
@@ -185,7 +313,7 @@ public: \
 	enum {IsIntrinsic=COMPILED_IN_INTRINSIC};
 
 
-#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_26_INCLASS \
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_41_INCLASS \
 private: \
 	static void StaticRegisterNativesATouchVRBaseCharacter(); \
 	friend ENVERSEDTOUCH_API class UClass* Z_Construct_UClass_ATouchVRBaseCharacter(); \
@@ -195,7 +323,7 @@ public: \
 	enum {IsIntrinsic=COMPILED_IN_INTRINSIC};
 
 
-#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_26_STANDARD_CONSTRUCTORS \
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_41_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API ATouchVRBaseCharacter(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(ATouchVRBaseCharacter) \
@@ -208,7 +336,7 @@ private: \
 public:
 
 
-#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_26_ENHANCED_CONSTRUCTORS \
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_41_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API ATouchVRBaseCharacter(ATouchVRBaseCharacter&&); \
@@ -219,26 +347,26 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(ATouchVRBaseCharacter); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(ATouchVRBaseCharacter)
 
 
-#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_26_PRIVATE_PROPERTY_OFFSET
-#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_23_PROLOG
-#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_26_GENERATED_BODY_LEGACY \
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_41_PRIVATE_PROPERTY_OFFSET
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_38_PROLOG
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_41_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_26_PRIVATE_PROPERTY_OFFSET \
-	BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_26_RPC_WRAPPERS \
-	BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_26_INCLASS \
-	BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_26_STANDARD_CONSTRUCTORS \
+	BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_41_PRIVATE_PROPERTY_OFFSET \
+	BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_41_RPC_WRAPPERS \
+	BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_41_INCLASS \
+	BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_41_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_26_GENERATED_BODY \
+#define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_41_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_26_PRIVATE_PROPERTY_OFFSET \
-	BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_26_RPC_WRAPPERS_NO_PURE_DECLS \
-	BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_26_INCLASS_NO_PURE_DECLS \
-	BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_26_ENHANCED_CONSTRUCTORS \
+	BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_41_PRIVATE_PROPERTY_OFFSET \
+	BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_41_RPC_WRAPPERS_NO_PURE_DECLS \
+	BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_41_INCLASS_NO_PURE_DECLS \
+	BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h_41_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -247,4 +375,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 #define CURRENT_FILE_ID BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchVRBaseCharacter_h
 
 
+#define FOREACH_ENUM_ETOUCHFINGERSTATE(op) \
+	op(ETouchFingerState::Begin) \
+	op(ETouchFingerState::Update) \
+	op(ETouchFingerState::Exit) 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
