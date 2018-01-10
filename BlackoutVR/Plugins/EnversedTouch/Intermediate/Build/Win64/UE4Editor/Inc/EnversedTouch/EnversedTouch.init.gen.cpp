@@ -21,6 +21,9 @@ void EmptyLinkFunctionForGeneratedCodeEnversedTouch_init() {}
 	ENVERSEDTOUCH_API UFunction* Z_Construct_UDelegateFunction_EnversedTouch_UpdateTouchWorldPosition__DelegateSignature();
 	ENVERSEDTOUCH_API UFunction* Z_Construct_UDelegateFunction_EnversedTouch_BeginTouchWorldPosition__DelegateSignature();
 	ENVERSEDTOUCH_API UFunction* Z_Construct_UDelegateFunction_EnversedTouch_EndTouchWorldPosition__DelegateSignature();
+	ENVERSEDTOUCH_API UFunction* Z_Construct_UDelegateFunction_EnversedTouch_BeginTouchWidget__DelegateSignature();
+	ENVERSEDTOUCH_API UFunction* Z_Construct_UDelegateFunction_EnversedTouch_UpdateTouchWidget__DelegateSignature();
+	ENVERSEDTOUCH_API UFunction* Z_Construct_UDelegateFunction_EnversedTouch_EndTouchWidget__DelegateSignature();
 	UPackage* Z_Construct_UPackage__Script_EnversedTouch()
 	{
 		static UPackage* ReturnPackage = nullptr;
@@ -29,8 +32,8 @@ void EmptyLinkFunctionForGeneratedCodeEnversedTouch_init() {}
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), nullptr, FName(TEXT("/Script/EnversedTouch")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000080);
 			FGuid Guid;
-			Guid.A = 0xD0C4EFFF;
-			Guid.B = 0xAAD70B5B;
+			Guid.A = 0x28A19D0A;
+			Guid.B = 0x453BA0E0;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);
@@ -44,6 +47,9 @@ void EmptyLinkFunctionForGeneratedCodeEnversedTouch_init() {}
 			Z_Construct_UDelegateFunction_EnversedTouch_UpdateTouchWorldPosition__DelegateSignature();
 			Z_Construct_UDelegateFunction_EnversedTouch_BeginTouchWorldPosition__DelegateSignature();
 			Z_Construct_UDelegateFunction_EnversedTouch_EndTouchWorldPosition__DelegateSignature();
+			Z_Construct_UDelegateFunction_EnversedTouch_BeginTouchWidget__DelegateSignature();
+			Z_Construct_UDelegateFunction_EnversedTouch_UpdateTouchWidget__DelegateSignature();
+			Z_Construct_UDelegateFunction_EnversedTouch_EndTouchWidget__DelegateSignature();
 		}
 		return ReturnPackage;
 	}
