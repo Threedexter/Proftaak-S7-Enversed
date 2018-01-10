@@ -535,10 +535,6 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_ETouchFingerState(ETouch
 				OuterClass->LinkChild(Z_Construct_UFunction_ATouchVRBaseCharacter_GetTouchedActor());
 				OuterClass->LinkChild(Z_Construct_UFunction_ATouchVRBaseCharacter_HasFingerIndex());
 
-				CPP_BOOL_PROPERTY_BITMASK_STRUCT(gameStarted, ATouchVRBaseCharacter);
-				UProperty* NewProp_gameStarted = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("gameStarted"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(gameStarted, ATouchVRBaseCharacter), 0x0010000000000005, CPP_BOOL_PROPERTY_BITMASK(gameStarted, ATouchVRBaseCharacter), sizeof(bool), true);
-				CPP_BOOL_PROPERTY_BITMASK_STRUCT(endGame, ATouchVRBaseCharacter);
-				UProperty* NewProp_endGame = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("endGame"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(endGame, ATouchVRBaseCharacter), 0x0010000000000005, CPP_BOOL_PROPERTY_BITMASK(endGame, ATouchVRBaseCharacter), sizeof(bool), true);
 				UProperty* NewProp_lastTouchLocation = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("lastTouchLocation"), RF_Public|RF_Transient|RF_MarkAsNative) UStructProperty(CPP_PROPERTY_BASE(lastTouchLocation, ATouchVRBaseCharacter), 0x0010000000020015, Z_Construct_UScriptStruct_FVector2D());
 				UProperty* NewProp_touchStructs = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("touchStructs"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(touchStructs, ATouchVRBaseCharacter), 0x0010000000020015);
 				UProperty* NewProp_touchStructs_Inner = new(EC_InternalUseOnlyConstructor, NewProp_touchStructs, TEXT("touchStructs"), RF_Public|RF_Transient|RF_MarkAsNative) UStructProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0000000000020000, Z_Construct_UScriptStruct_FTouchFinger());
@@ -569,10 +565,6 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_ETouchFingerState(ETouch
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("TouchVRBaseCharacter.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/TouchVRBaseCharacter.h"));
 				MetaData->SetValue(OuterClass, TEXT("ObjectInitializerConstructorDeclared"), TEXT(""));
-				MetaData->SetValue(NewProp_gameStarted, TEXT("Category"), TEXT("Game"));
-				MetaData->SetValue(NewProp_gameStarted, TEXT("ModuleRelativePath"), TEXT("Public/TouchVRBaseCharacter.h"));
-				MetaData->SetValue(NewProp_endGame, TEXT("Category"), TEXT("Game"));
-				MetaData->SetValue(NewProp_endGame, TEXT("ModuleRelativePath"), TEXT("Public/TouchVRBaseCharacter.h"));
 				MetaData->SetValue(NewProp_lastTouchLocation, TEXT("Category"), TEXT("Touch|Location"));
 				MetaData->SetValue(NewProp_lastTouchLocation, TEXT("ModuleRelativePath"), TEXT("Public/TouchVRBaseCharacter.h"));
 				MetaData->SetValue(NewProp_touchStructs, TEXT("Category"), TEXT("Touch|Actors"));
@@ -609,7 +601,7 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_ETouchFingerState(ETouch
 		check(OuterClass->GetClass());
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ATouchVRBaseCharacter, 2069716072);
+	IMPLEMENT_CLASS(ATouchVRBaseCharacter, 4199778608);
 	static FCompiledInDefer Z_CompiledInDefer_UClass_ATouchVRBaseCharacter(Z_Construct_UClass_ATouchVRBaseCharacter, &ATouchVRBaseCharacter::StaticClass, TEXT("/Script/EnversedTouch"), TEXT("ATouchVRBaseCharacter"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(ATouchVRBaseCharacter);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

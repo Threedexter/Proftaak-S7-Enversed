@@ -128,12 +128,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleAnyWhere, Category = "Touch|Location")
 		FVector2D lastTouchLocation;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Game")
-		bool endGame = false;
-
-	UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category = "Game")
-		bool gameStarted = false;
-
 private:
 	ATouchSpectatorCapture* currentSpecCam;
 

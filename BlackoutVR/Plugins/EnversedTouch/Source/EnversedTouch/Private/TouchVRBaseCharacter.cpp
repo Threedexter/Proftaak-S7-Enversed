@@ -14,7 +14,6 @@ ATouchVRBaseCharacter::ATouchVRBaseCharacter(const FObjectInitializer& ObjectIni
 void ATouchVRBaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
 }
 
 // Called to bind functionality to input
@@ -75,7 +74,6 @@ void ATouchVRBaseCharacter::RemoveTouchFromArray(ETouchIndex::Type fingerIndex)
 
 bool ATouchVRBaseCharacter::CheckIfTouchedActorOnEnter(ETouchIndex::Type fingerIndex, FVector2D touchScreenLocation, FHitResult& hit)
 {
-	//Voor TouchVRSimpleCharacter doe if(endGame) return;
 	if (TouchTrace(touchScreenLocation, hit))
 	{
 		onTouchHitBegin.Broadcast(hit, hit.Location);
@@ -86,34 +84,27 @@ bool ATouchVRBaseCharacter::CheckIfTouchedActorOnEnter(ETouchIndex::Type fingerI
 			return true;
 		}
 	}
-	/* Voor TouchVRSimpleCharacter
-	 *
-	 * 	else if (gameStarted && (actor = GetNearestActor(hitLocation, length)) != nullptr)
-	{
-		if (!CheckActorBeenTouched(actor))
-		{
-			// check if distance is not too far
-			if (length <= touchDistance)
-			{
-				AddFingerTouchToArray(fingerIndex, hitLocation, actor);
-			}
-		}
-	}
-	 */
 	return false;
 }
 
 bool ATouchVRBaseCharacter::CheckIfTouchedActorOnMoved(ETouchIndex::Type fingerIndex, FVector2D touchScreenLocation,
 	FHitResult& hit)
 {
-	//if (endGame) return; in super klasse
 	if (TouchTrace(touchScreenLocation, hit))
 	{
 		onTouchHitUpdate.Broadcast(hit, hit.Location);
+
+		for (FTouchFinger touchStruct : touchStructs)
+		{
+			if (touchStruct.fingerIndex == fingerIndex)
+			{
+				touchStruct.lastTouchedPosition = hit.Location;
+			}
+		}
+
 		if (hit.GetActor())
 		{
-			onTouchActorUpdate.Broadcast(hit.GetActor(), hit.Location);
-			//SetTouchedActorMovementLocation(fingerIndex, hit.Location); in super klasse
+			onTouchActorUpdate.Broadcast(hit.GetActor(), hit.Location);			
 			return true;
 		}
 	}
@@ -124,7 +115,6 @@ bool ATouchVRBaseCharacter::CheckIfTouchedActorOnMoved(ETouchIndex::Type fingerI
 bool ATouchVRBaseCharacter::CheckIfTouchedActorOnExit(ETouchIndex::Type fingerIndex, FVector2D touchScreenLocation,
 	FHitResult& hit)
 {
-	//Voor TouchVRSimpleCharacter doe if(endGame) return;
 	if (TouchTrace(touchScreenLocation, hit))
 	{
 		onTouchHitEnd.Broadcast(hit, hit.Location);
