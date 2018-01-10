@@ -4,6 +4,7 @@
 #include "F:\School\S7\GPT7\Proftaak-S7-Enversed\BlackoutVR\Plugins\EnversedTouch\Source\EnversedTouch\Private\FTouchFinger.cpp"
 #include "F:\School\S7\GPT7\Proftaak-S7-Enversed\BlackoutVR\Plugins\EnversedTouch\Source\EnversedTouch\Private\MultiTouchButtonLibrary.cpp"
 #include "F:\School\S7\GPT7\Proftaak-S7-Enversed\BlackoutVR\Plugins\EnversedTouch\Source\EnversedTouch\Private\TouchActorInterface.cpp"
+#include "F:\School\S7\GPT7\Proftaak-S7-Enversed\BlackoutVR\Plugins\EnversedTouch\Source\EnversedTouch\Private\TouchPlayerPawn.cpp"
 #include "F:\School\S7\GPT7\Proftaak-S7-Enversed\BlackoutVR\Plugins\EnversedTouch\Source\EnversedTouch\Private\TouchScreen.cpp"
 #include "F:\School\S7\GPT7\Proftaak-S7-Enversed\BlackoutVR\Plugins\EnversedTouch\Source\EnversedTouch\Private\TouchSpectatorCapture.cpp"
 #include "F:\School\S7\GPT7\Proftaak-S7-Enversed\BlackoutVR\Plugins\EnversedTouch\Source\EnversedTouch\Private\TouchSpectatorWidgetInteraction.cpp"

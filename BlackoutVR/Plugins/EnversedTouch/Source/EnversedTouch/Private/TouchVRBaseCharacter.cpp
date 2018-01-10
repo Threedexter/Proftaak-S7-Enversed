@@ -8,6 +8,7 @@
 ATouchVRBaseCharacter::ATouchVRBaseCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
+	PrimaryActorTick.bCanEverTick = true;
 }
 
 // Called when the game starts or when spawned

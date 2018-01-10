@@ -4,6 +4,7 @@
 #include "F:\School\S7\GPT7\Proftaak-S7-Enversed\BlackoutVR\Plugins\EnversedTouch\Intermediate\Build\Win64\UE4Editor\Inc\EnversedTouch\FTouchFinger.gen.cpp"
 #include "F:\School\S7\GPT7\Proftaak-S7-Enversed\BlackoutVR\Plugins\EnversedTouch\Intermediate\Build\Win64\UE4Editor\Inc\EnversedTouch\MultiTouchButtonLibrary.gen.cpp"
 #include "F:\School\S7\GPT7\Proftaak-S7-Enversed\BlackoutVR\Plugins\EnversedTouch\Intermediate\Build\Win64\UE4Editor\Inc\EnversedTouch\TouchActorInterface.gen.cpp"
+#include "F:\School\S7\GPT7\Proftaak-S7-Enversed\BlackoutVR\Plugins\EnversedTouch\Intermediate\Build\Win64\UE4Editor\Inc\EnversedTouch\TouchPlayerPawn.gen.cpp"
 #include "F:\School\S7\GPT7\Proftaak-S7-Enversed\BlackoutVR\Plugins\EnversedTouch\Intermediate\Build\Win64\UE4Editor\Inc\EnversedTouch\TouchSpectatorCapture.gen.cpp"
 #include "F:\School\S7\GPT7\Proftaak-S7-Enversed\BlackoutVR\Plugins\EnversedTouch\Intermediate\Build\Win64\UE4Editor\Inc\EnversedTouch\TouchSpectatorWidgetInteraction.gen.cpp"
 #include "F:\School\S7\GPT7\Proftaak-S7-Enversed\BlackoutVR\Plugins\EnversedTouch\Intermediate\Build\Win64\UE4Editor\Inc\EnversedTouch\TouchVRBaseCharacter.gen.cpp"
