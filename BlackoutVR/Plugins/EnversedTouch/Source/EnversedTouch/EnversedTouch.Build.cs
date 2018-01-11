@@ -32,6 +32,7 @@ public class EnversedTouch : ModuleRules
                 "AIModule",
                 "HeadMountedDisplay",
                 "SteamVR",
+                "AIModule",
                 "UMG", 
 				// ... add other public dependencies that you statically link with here ...
 			}
