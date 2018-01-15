@@ -61,7 +61,7 @@ void EmptyLinkFunctionForGeneratedCodeTouchVRBaseCharacter() {}
 			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("EndTouchWidget__DelegateSignature"), RF_Public|RF_Transient|RF_MarkAsNative) UDelegateFunction(FObjectInitializer(), nullptr, (EFunctionFlags)0x00130000, 65535, sizeof(_Script_EnversedTouch_eventEndTouchWidget_Parms));
 			CPP_BOOL_PROPERTY_BITMASK_STRUCT(hitWidget, _Script_EnversedTouch_eventEndTouchWidget_Parms);
 			UProperty* NewProp_hitWidget = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("hitWidget"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(hitWidget, _Script_EnversedTouch_eventEndTouchWidget_Parms), 0x0010000000000080, CPP_BOOL_PROPERTY_BITMASK(hitWidget, _Script_EnversedTouch_eventEndTouchWidget_Parms), sizeof(bool), true);
-			UProperty* NewProp_widgets = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("widgets"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(widgets, _Script_EnversedTouch_eventEndTouchWidget_Parms), 0x0010000000000080);
+			UProperty* NewProp_widgets = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("widgets"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(widgets, _Script_EnversedTouch_eventEndTouchWidget_Parms), 0x0010000008000182);
 			UProperty* NewProp_widgets_Inner = new(EC_InternalUseOnlyConstructor, NewProp_widgets, TEXT("widgets"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0000000000000000, Z_Construct_UClass_UWidgetWrapper_NoRegister());
 			UProperty* NewProp_touchWorldHit = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("touchWorldHit"), RF_Public|RF_Transient|RF_MarkAsNative) UStructProperty(CPP_PROPERTY_BASE(touchWorldHit, _Script_EnversedTouch_eventEndTouchWidget_Parms), 0x0010008000000080, Z_Construct_UScriptStruct_FHitResult());
 			UProperty* NewProp_touchWidgetLocation = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("touchWidgetLocation"), RF_Public|RF_Transient|RF_MarkAsNative) UStructProperty(CPP_PROPERTY_BASE(touchWidgetLocation, _Script_EnversedTouch_eventEndTouchWidget_Parms), 0x0010000000000080, Z_Construct_UScriptStruct_FVector2D());
@@ -70,6 +70,7 @@ void EmptyLinkFunctionForGeneratedCodeTouchVRBaseCharacter() {}
 #if WITH_METADATA
 			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
 			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/TouchVRBaseCharacter.h"));
+			MetaData->SetValue(NewProp_widgets, TEXT("NativeConst"), TEXT(""));
 #endif
 		}
 		return ReturnFunction;
@@ -90,7 +91,7 @@ void EmptyLinkFunctionForGeneratedCodeTouchVRBaseCharacter() {}
 			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("UpdateTouchWidget__DelegateSignature"), RF_Public|RF_Transient|RF_MarkAsNative) UDelegateFunction(FObjectInitializer(), nullptr, (EFunctionFlags)0x00130000, 65535, sizeof(_Script_EnversedTouch_eventUpdateTouchWidget_Parms));
 			CPP_BOOL_PROPERTY_BITMASK_STRUCT(hitWidget, _Script_EnversedTouch_eventUpdateTouchWidget_Parms);
 			UProperty* NewProp_hitWidget = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("hitWidget"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(hitWidget, _Script_EnversedTouch_eventUpdateTouchWidget_Parms), 0x0010000000000080, CPP_BOOL_PROPERTY_BITMASK(hitWidget, _Script_EnversedTouch_eventUpdateTouchWidget_Parms), sizeof(bool), true);
-			UProperty* NewProp_widgets = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("widgets"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(widgets, _Script_EnversedTouch_eventUpdateTouchWidget_Parms), 0x0010000000000080);
+			UProperty* NewProp_widgets = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("widgets"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(widgets, _Script_EnversedTouch_eventUpdateTouchWidget_Parms), 0x0010000008000182);
 			UProperty* NewProp_widgets_Inner = new(EC_InternalUseOnlyConstructor, NewProp_widgets, TEXT("widgets"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0000000000000000, Z_Construct_UClass_UWidgetWrapper_NoRegister());
 			UProperty* NewProp_touchWorldHit = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("touchWorldHit"), RF_Public|RF_Transient|RF_MarkAsNative) UStructProperty(CPP_PROPERTY_BASE(touchWorldHit, _Script_EnversedTouch_eventUpdateTouchWidget_Parms), 0x0010008000000080, Z_Construct_UScriptStruct_FHitResult());
 			UProperty* NewProp_touchWidgetLocation = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("touchWidgetLocation"), RF_Public|RF_Transient|RF_MarkAsNative) UStructProperty(CPP_PROPERTY_BASE(touchWidgetLocation, _Script_EnversedTouch_eventUpdateTouchWidget_Parms), 0x0010000000000080, Z_Construct_UScriptStruct_FVector2D());
@@ -99,6 +100,7 @@ void EmptyLinkFunctionForGeneratedCodeTouchVRBaseCharacter() {}
 #if WITH_METADATA
 			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
 			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/TouchVRBaseCharacter.h"));
+			MetaData->SetValue(NewProp_widgets, TEXT("NativeConst"), TEXT(""));
 #endif
 		}
 		return ReturnFunction;
@@ -119,7 +121,7 @@ void EmptyLinkFunctionForGeneratedCodeTouchVRBaseCharacter() {}
 			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("BeginTouchWidget__DelegateSignature"), RF_Public|RF_Transient|RF_MarkAsNative) UDelegateFunction(FObjectInitializer(), nullptr, (EFunctionFlags)0x00130000, 65535, sizeof(_Script_EnversedTouch_eventBeginTouchWidget_Parms));
 			CPP_BOOL_PROPERTY_BITMASK_STRUCT(hitWidget, _Script_EnversedTouch_eventBeginTouchWidget_Parms);
 			UProperty* NewProp_hitWidget = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("hitWidget"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(hitWidget, _Script_EnversedTouch_eventBeginTouchWidget_Parms), 0x0010000000000080, CPP_BOOL_PROPERTY_BITMASK(hitWidget, _Script_EnversedTouch_eventBeginTouchWidget_Parms), sizeof(bool), true);
-			UProperty* NewProp_widgets = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("widgets"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(widgets, _Script_EnversedTouch_eventBeginTouchWidget_Parms), 0x0010000000000080);
+			UProperty* NewProp_widgets = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("widgets"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(widgets, _Script_EnversedTouch_eventBeginTouchWidget_Parms), 0x0010000008000182);
 			UProperty* NewProp_widgets_Inner = new(EC_InternalUseOnlyConstructor, NewProp_widgets, TEXT("widgets"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0000000000000000, Z_Construct_UClass_UWidgetWrapper_NoRegister());
 			UProperty* NewProp_touchWorldHit = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("touchWorldHit"), RF_Public|RF_Transient|RF_MarkAsNative) UStructProperty(CPP_PROPERTY_BASE(touchWorldHit, _Script_EnversedTouch_eventBeginTouchWidget_Parms), 0x0010008000000080, Z_Construct_UScriptStruct_FHitResult());
 			UProperty* NewProp_touchWidgetLocation = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("touchWidgetLocation"), RF_Public|RF_Transient|RF_MarkAsNative) UStructProperty(CPP_PROPERTY_BASE(touchWidgetLocation, _Script_EnversedTouch_eventBeginTouchWidget_Parms), 0x0010000000000080, Z_Construct_UScriptStruct_FVector2D());
@@ -128,6 +130,7 @@ void EmptyLinkFunctionForGeneratedCodeTouchVRBaseCharacter() {}
 #if WITH_METADATA
 			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
 			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/TouchVRBaseCharacter.h"));
+			MetaData->SetValue(NewProp_widgets, TEXT("NativeConst"), TEXT(""));
 #endif
 		}
 		return ReturnFunction;

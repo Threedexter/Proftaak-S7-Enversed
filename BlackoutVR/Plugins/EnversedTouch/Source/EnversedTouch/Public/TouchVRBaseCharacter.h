@@ -17,9 +17,9 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FEndTouchActor, AActor*, touchActor
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FUpdateTouchWorldPosition, FHitResult, touchHitResult, FVector, worldHitPosition);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FBeginTouchWorldPosition, FHitResult, touchHitResult, FVector, worldHitPosition);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FEndTouchWorldPosition, FHitResult, touchHitResult, FVector, worldHitPosition);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FBeginTouchWidget, FVector2D, touchWidgetLocation, FHitResult, touchWorldHit, TArray<UWidgetWrapper*>, widgets, bool, hitWidget);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FUpdateTouchWidget, FVector2D, touchWidgetLocation, FHitResult, touchWorldHit, TArray<UWidgetWrapper*>, widgets, bool, hitWidget);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FEndTouchWidget, FVector2D, touchWidgetLocation, FHitResult, touchWorldHit, TArray<UWidgetWrapper*>, widgets, bool, hitWidget);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FBeginTouchWidget, FVector2D, touchWidgetLocation, FHitResult, touchWorldHit, const TArray<UWidgetWrapper*>&, widgets, bool, hitWidget);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FUpdateTouchWidget, FVector2D, touchWidgetLocation, FHitResult, touchWorldHit, const TArray<UWidgetWrapper*>&, widgets, bool, hitWidget);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FEndTouchWidget, FVector2D, touchWidgetLocation, FHitResult, touchWorldHit, const TArray<UWidgetWrapper*>&, widgets, bool, hitWidget);
 
 /**
 * Structure used for remembering the lastTouchedPosition for a finger.
