@@ -19,7 +19,7 @@ AMovementActor::AMovementActor()
 	collisionBox->bDynamicObstacle = true;
 	collisionBox->RegisterComponent();
 	collisionBox->bEditableWhenInherited = true;
-	collisionBox->AttachTo(root);
+	collisionBox->SetupAttachment(GetRootComponent());
 }
 
 // Called when the game starts or when spawned
@@ -106,6 +106,15 @@ void AMovementActor::ActorStartedMoving_Implementation()
 {
 }
 
+int32 AMovementActor::GetTouchActorID_Implementation()
+{
+	return 0;
+}
+
+int32 AMovementActor::SetTouchActorID_Implementation(int32 ID)
+{
+	return 0;
+}
 
 void AMovementActor::SetScore_Implementation(int score)
 {

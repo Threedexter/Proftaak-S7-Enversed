@@ -33,4 +33,10 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Movement")
 		void ActorStartedMoving();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TouchActor|ID")
+		int32 GetTouchActorID();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "TouchActor|ID")
+		int32 SetTouchActorID(int32 ID);
 };

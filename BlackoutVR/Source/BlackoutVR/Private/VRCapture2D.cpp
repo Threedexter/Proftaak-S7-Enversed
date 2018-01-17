@@ -8,6 +8,8 @@
 #include "TouchScreenHandler.h"
 #include "Runtime/Renderer/Private/ScenePrivate.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Widget.h"
+#include "SWidgetWrapper.h"
 
 
 AVRCapture2D::AVRCapture2D(const FObjectInitializer& ObjectInitializer)
@@ -20,10 +22,6 @@ AVRCapture2D::AVRCapture2D(const FObjectInitializer& ObjectInitializer)
 	widgetInteraction->InteractionSource = EWidgetInteractionSource::Custom;
 	widgetInteraction->InteractionDistance = 10000.f;
 	widgetInteraction->bEditableWhenInherited = true;
-	widgetInteraction->SetupAttachment(RootComponent);
-
-	touchRotationReference = CreateDefaultSubobject<USceneComponent>(TEXT("TouchRotationReference"));
-	touchRotationReference->RelativeRotation = FRotator(135, 0, 0);
 	widgetInteraction->SetupAttachment(RootComponent);
 }
 
@@ -59,12 +57,55 @@ FHitResult AVRCapture2D::RayCastWorld(FVector2D touchPosition, float rayDistance
 	return hit;
 }
 
-bool AVRCapture2D::CheckIfTouchedWidgetFromCamera(FVector2D touchPosition, float rayDistance, FVector2D& touchLocationWidget,
-	FHitResult& touchLocationWorld)
+bool AVRCapture2D::CheckIfTouchedWidgetCustom(FVector startLocation, FVector endLocation, float rayDistance,
+	FVector2D& touchLocationWidget, FHitResult& touchLocationWorld)
+{
+	FCollisionQueryParams params;
+	FCollisionResponseParams colResponseParams;
+	colResponseParams.CollisionResponse.SetAllChannels(ECollisionResponse::ECR_Block);
+	GetWorld()->LineTraceSingleByChannel(touchLocationWorld, startLocation, endLocation, UITraceChannel, params, colResponseParams);
+
+	if (bShowDebug) {
+		UKismetSystemLibrary::DrawDebugLine(this, touchLocationWorld.TraceStart, touchLocationWorld.ImpactPoint, linearColor, 5.f, 3);
+	}
+
+	widgetInteraction->SetCustomHitResultAndUpdate(touchLocationWorld);
+	touchLocationWidget = widgetInteraction->Get2DHitLocation();
+	return widgetInteraction->IsOverFocusableWidget() || widgetInteraction->IsOverInteractableWidget();
+}
+
+bool AVRCapture2D::CheckIfTouchedWidgetFromCamera(FVector2D touchPosition, float rayDistance,
+	FVector2D& touchLocationWidget, FHitResult& touchLocationWorld)
+{
+	TArray<USWidgetWrapper*> a;
+	return GetTouchedWidgetsFromCamera(touchPosition, rayDistance, touchLocationWidget, touchLocationWorld, a);
+}
+
+bool AVRCapture2D::GetTouchedWidgetsFromCamera(FVector2D touchPosition, float rayDistance,
+	FVector2D& touchLocationWidget, FHitResult& touchLocationWorld, TArray<USWidgetWrapper*>& widgets)
 {
 	if (!widgetInteraction) return false;
 	touchLocationWorld = RayCastWorld(touchPosition, rayDistance);
 	widgetInteraction->SetCustomHitResultAndUpdate(touchLocationWorld);
 	touchLocationWidget = widgetInteraction->Get2DHitLocation();
-	return widgetInteraction->IsOverFocusableWidget() || widgetInteraction->IsOverInteractableWidget();
+	bool isOverWidget = widgetInteraction->IsOverFocusableWidget() || widgetInteraction->IsOverInteractableWidget();
+	if (isOverWidget)
+	{
+		TArray<TWeakPtr<SWidget>> wsarr = widgetInteraction->GetHoveredWidgetPath().Widgets;
+		for (int i = 0; i < wsarr.Num(); i++)
+		{
+			TWeakPtr<SWidget> ws = wsarr[i];
+			if (ws.IsValid())
+			{
+				SWidget* widg = &(*ws.Pin());
+				if (widg) {
+					USWidgetWrapper* widgetWrapper = NewObject<USWidgetWrapper>();
+					widgetWrapper->SetWidget(widg);
+					widgets.Add(widgetWrapper);
+				}
+			}
+		}
+	}
+	return isOverWidget;
 }
+

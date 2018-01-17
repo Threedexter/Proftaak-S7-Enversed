@@ -15,6 +15,9 @@ class BLACKOUTVR_API ATouchPawn : public ACharacter, public ITouchActor, public 
 	GENERATED_BODY()
 
 public:
+	UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category = "TouchActor|ID")
+	int32 touchActorID;
+
 	UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category = "Movement")
 	float speed = 1.0f;
 
@@ -39,10 +42,17 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+
+	UFUNCTION(Server, Reliable, WithValidation)
+		void SetMoveActorServer(FVector moveLocation);
+
+	//interface functions
 	virtual void SetMoveActorLocation_Implementation(FVector moveLocation) override;
 	virtual void StopActorMovement_Implementation() override;
 	virtual void ActorStoppedMoving_Implementation() override;
 	virtual void ActorStartedMoving_Implementation() override;
+	virtual int32 GetTouchActorID_Implementation() override;
+	virtual int32 SetTouchActorID_Implementation(int32 ID) override;
 
 	virtual void AddToScore_Implementation(int score) override;
 	virtual void SetScore_Implementation(int score) override;

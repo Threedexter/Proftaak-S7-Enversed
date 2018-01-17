@@ -22,6 +22,7 @@ ATouchPawn::ATouchPawn(const FObjectInitializer& ObjectInitializer)
 	collisionBox->bDynamicObstacle = true;
 	collisionBox->bEditableWhenInherited = true;
 	collisionBox->SetupAttachment(GetRootComponent());
+	bReplicates = true;
 }
 
 // Called when the game starts or when spawned
@@ -38,13 +39,23 @@ void ATouchPawn::Tick(float DeltaTime)
 
 }
 
-void ATouchPawn::SetMoveActorLocation_Implementation(FVector moveLocation)
+void ATouchPawn::SetMoveActorServer_Implementation(FVector moveLocation)
 {
 	AAIController* ai = Cast<AAIController>(GetController());
 	if (ai) {
 		ITouchActor::Execute_ActorStartedMoving(this);
 		ai->MoveToLocation(moveLocation, 10.0f, false, true, false, true, nullptr, true);
 	}
+}
+
+bool ATouchPawn::SetMoveActorServer_Validate(FVector moveLocation)
+{
+	return true;
+}
+
+void ATouchPawn::SetMoveActorLocation_Implementation(FVector moveLocation)
+{
+	SetMoveActorServer(moveLocation);
 }
 
 void ATouchPawn::StopActorMovement_Implementation()
@@ -62,6 +73,16 @@ void ATouchPawn::ActorStoppedMoving_Implementation()
 
 void ATouchPawn::ActorStartedMoving_Implementation()
 {
+}
+
+int32 ATouchPawn::GetTouchActorID_Implementation()
+{
+	return touchActorID;
+}
+
+int32 ATouchPawn::SetTouchActorID_Implementation(int32 ID)
+{
+	return touchActorID = ID;
 }
 
 

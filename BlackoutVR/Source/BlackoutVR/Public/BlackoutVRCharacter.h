@@ -22,6 +22,8 @@
  * 
  */
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FUpdateTouchPosition, FVector2D, TouchLocation, bool, IsTouch);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FBeginTouchPosition, FVector2D, TouchLocation, bool, IsTouch);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FEndTouchPosition, FVector2D, TouchLocation, bool, IsTouch);
 
 UCLASS()
 class BLACKOUTVR_API ABlackoutVRCharacter : public ACharacter, public IScoreKeeper, public IITouchData
@@ -49,6 +51,12 @@ public:
 	UPROPERTY(BlueprintAssignable)
 		FUpdateTouchPosition onTouchUpdate;
 
+	UPROPERTY(BlueprintAssignable)
+		FBeginTouchPosition onTouchBegin;
+
+	UPROPERTY(BlueprintAssignable)
+		FEndTouchPosition onTouchEnd;
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Game|Touch")
 		float touchDistance = 50;
 
@@ -74,6 +82,7 @@ private:
 		AVRCapture2D* currentSpecCam;
 		TouchScreenHandler touch_screen_handler;
 		UScoreSystem actorHandler;
+		bool firstPress = true;
 public:
 
 	/**
@@ -112,13 +121,13 @@ public:
 	bool CheckIfTouchedActor(FVector2D touchLocation, FVector& hitLocation, AActor*& actor);
 
 	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
-	bool HasTouchedActor(ETouchIndex::Type fingerIndex);
-
-	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
 	bool CheckActorBeenTouched(AActor* actor);
 
 	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
 	void AddFingerTouchToArray(ETouchIndex::Type fingerIndex, FVector hitLocation, AActor* actor);
+
+	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
+	bool HasFingerIndex(ETouchIndex::Type fingerIndex);
 
 	UFUNCTION(BlueprintCallable, Category = "Touch|Actor")
 	void RemoveTouchFromArray(ETouchIndex::Type fingerIndex);

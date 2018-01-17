@@ -10,7 +10,7 @@ public class BlackoutVR : ModuleRules
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "AIModule" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "HeadMountedDisplay" , "SteamVR" });
+		PrivateDependencyModuleNames.AddRange(new string[] { "HeadMountedDisplay" , "SteamVR", "Slate", "SlateCore" });
 		
         Definitions.Add("WINVER=0x0A00");  
         Definitions.Add("_WIN32_WINNT_WINBLUE=0x0A00");  
