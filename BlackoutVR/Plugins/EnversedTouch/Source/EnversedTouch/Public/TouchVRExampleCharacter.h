@@ -25,10 +25,10 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category = "Score")
 		FString Name;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "Controller")
+	UPROPERTY(EditAnyWhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"), Category = "Controller")
 		UMotionControllerComponent* LeftMotionController;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "Controller")
+	UPROPERTY(EditAnyWhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"), Category = "Controller")
 		UMotionControllerComponent* RightMotionController;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "VR|Camera")

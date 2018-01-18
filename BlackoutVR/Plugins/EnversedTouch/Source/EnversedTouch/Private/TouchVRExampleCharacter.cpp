@@ -22,9 +22,9 @@ void ATouchVRExampleCharacter::CreateAndAttachMotionController(UMotionController
 	motionController->bAutoActivate = true;
 	motionController->bAutoRegister = true;
 	motionController->Hand = hand;
-	motionController->SetupAttachment(RootComponent);
-	motionController->SetWorldLocation(RootComponent->GetComponentLocation());
-	motionController->RelativeLocation = FVector(0, 0, 0);
+	motionController->SetupAttachment(VROrigin);
+	motionController->SetWorldLocation(VROrigin->GetComponentLocation());
+	motionController->RelativeLocation = VROrigin->RelativeLocation;
 }
 
 void ATouchVRExampleCharacter::SetScore_Implementation(int score)
