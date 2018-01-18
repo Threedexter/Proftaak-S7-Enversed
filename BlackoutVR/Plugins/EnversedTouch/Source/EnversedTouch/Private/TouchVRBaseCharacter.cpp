@@ -100,13 +100,12 @@ bool ATouchVRBaseCharacter::CheckIfTouchedActorOnMoved(ETouchIndex::Type fingerI
 			if (touchStruct.fingerIndex == fingerIndex)
 			{
 				touchStruct.lastTouchedPosition = hit.Location;
+				if(touchStruct.touchedActor)
+				{
+					onTouchActorUpdate.Broadcast(touchStruct.touchedActor, hit.Location);
+					return true;
+				}
 			}
-		}
-
-		if (hit.GetActor())
-		{
-			onTouchActorUpdate.Broadcast(hit.GetActor(), hit.Location);			
-			return true;
 		}
 	}
 
@@ -119,10 +118,15 @@ bool ATouchVRBaseCharacter::CheckIfTouchedActorOnExit(ETouchIndex::Type fingerIn
 	if (TouchTrace(touchScreenLocation, hit))
 	{
 		onTouchHitEnd.Broadcast(hit, hit.Location);
-		if (hit.GetActor())
-		{
-			onTouchActorEnd.Broadcast(hit.GetActor(), hit.Location);
-			return true;
+		for (FTouchFinger touchStruct : touchStructs) {
+			if (touchStruct.fingerIndex == fingerIndex)
+			{
+				touchStruct.lastTouchedPosition = hit.Location;
+				if (touchStruct.touchedActor) {
+					onTouchActorEnd.Broadcast(touchStruct.touchedActor, hit.Location);
+					return true;
+				}
+			}
 		}
 	}
 	return false;

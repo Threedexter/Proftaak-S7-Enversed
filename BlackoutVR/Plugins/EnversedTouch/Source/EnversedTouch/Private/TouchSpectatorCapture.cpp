@@ -105,3 +105,8 @@ bool ATouchSpectatorCapture::GetTouchedWidgetsFromCamera(FVector2D touchPosition
 	}
 	return isOverWidget;
 }
+
+void ATouchSpectatorCapture::KillTouchFeedback()
+{
+	TouchScreen* a = new TouchScreen();
+}

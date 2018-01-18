@@ -32,8 +32,8 @@ void EmptyLinkFunctionForGeneratedCodeEnversedTouch_init() {}
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), nullptr, FName(TEXT("/Script/EnversedTouch")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000080);
 			FGuid Guid;
-			Guid.A = 0x34E292E5;
-			Guid.B = 0x6042C2BE;
+			Guid.A = 0x11DC8ADD;
+			Guid.B = 0x8DB9CF68;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

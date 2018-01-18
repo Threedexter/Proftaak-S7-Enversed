@@ -27,7 +27,7 @@ ATouchPlayerPawn::ATouchPlayerPawn(const FObjectInitializer& ObjectInitializer)
 void ATouchPlayerPawn::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	SpawnDefaultController(); //spawning the AI controller
 }
 
 // Called every frame

@@ -15,7 +15,7 @@ UCLASS()
 class ENVERSEDTOUCH_API ATouchSpectatorCapture : public ASceneCapture2D
 {
 	GENERATED_BODY()
-	
+
 
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "UI|CollisionChannel")
@@ -31,7 +31,7 @@ public:
 		UTouchSpectatorWidgetInteraction* widgetInteraction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Touch|Rotation")
-		FRotator originRotation = FRotator(90.f, 0.f, 90.f);
+		FRotator originRotation = FRotator(0.f, 90.f, 90.f);
 
 public:
 
@@ -45,10 +45,13 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Screen")
 		bool CheckIfTouchedWidgetCustom(FVector startLocation, FVector endLocation, float rayDistance, FVector2D& touchLocationWidget, FHitResult& touchLocationWorld);
-	
+
 	UFUNCTION(BlueprintCallable, Category = "Screen")
 		bool CheckIfTouchedWidgetFromCamera(FVector2D touchPosition, float rayDistance, FVector2D& touchLocationWidget, FHitResult& touchLocationWorld);
 
 	UFUNCTION(BlueprintCallable, Category = "Screen")
-		bool GetTouchedWidgetsFromCamera(FVector2D touchPosition, float rayDistance, FVector2D& touchLocationWidget, FHitResult& touchLocationWorld, TArray<UWidgetWrapper*>& widgets);	
+		bool GetTouchedWidgetsFromCamera(FVector2D touchPosition, float rayDistance, FVector2D& touchLocationWidget, FHitResult& touchLocationWorld, TArray<UWidgetWrapper*>& widgets);
+
+	UFUNCTION(BlueprintCallable, Category = "Touch")
+		void KillTouchFeedback();
 };
