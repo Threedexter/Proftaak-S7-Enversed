@@ -22,6 +22,7 @@ void EmptyLinkFunctionForGeneratedCodeTouchSpectatorCapture() {}
 	ENVERSEDTOUCH_API UFunction* Z_Construct_UFunction_ATouchSpectatorCapture_CheckIfTouchedWidgetFromCamera();
 	ENVERSEDTOUCH_API UFunction* Z_Construct_UFunction_ATouchSpectatorCapture_GetTouchedWidgetsFromCamera();
 	ENVERSEDTOUCH_API UClass* Z_Construct_UClass_UWidgetWrapper_NoRegister();
+	ENVERSEDTOUCH_API UFunction* Z_Construct_UFunction_ATouchSpectatorCapture_KillTouchFeedback();
 	ENVERSEDTOUCH_API UFunction* Z_Construct_UFunction_ATouchSpectatorCapture_RayCastWorld();
 	ENVERSEDTOUCH_API UFunction* Z_Construct_UFunction_ATouchSpectatorCapture_ScreenToWorld();
 	ENVERSEDTOUCH_API UClass* Z_Construct_UClass_ATouchSpectatorCapture_NoRegister();
@@ -39,6 +40,7 @@ void EmptyLinkFunctionForGeneratedCodeTouchSpectatorCapture() {}
 			{ "CheckIfTouchedWidgetCustom", (Native)&ATouchSpectatorCapture::execCheckIfTouchedWidgetCustom },
 			{ "CheckIfTouchedWidgetFromCamera", (Native)&ATouchSpectatorCapture::execCheckIfTouchedWidgetFromCamera },
 			{ "GetTouchedWidgetsFromCamera", (Native)&ATouchSpectatorCapture::execGetTouchedWidgetsFromCamera },
+			{ "KillTouchFeedback", (Native)&ATouchSpectatorCapture::execKillTouchFeedback },
 			{ "RayCastWorld", (Native)&ATouchSpectatorCapture::execRayCastWorld },
 			{ "ScreenToWorld", (Native)&ATouchSpectatorCapture::execScreenToWorld },
 		};
@@ -142,6 +144,23 @@ void EmptyLinkFunctionForGeneratedCodeTouchSpectatorCapture() {}
 		}
 		return ReturnFunction;
 	}
+	UFunction* Z_Construct_UFunction_ATouchSpectatorCapture_KillTouchFeedback()
+	{
+		UObject* Outer = Z_Construct_UClass_ATouchSpectatorCapture();
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("KillTouchFeedback"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), nullptr, (EFunctionFlags)0x04020401, 65535);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Touch"));
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/TouchSpectatorCapture.h"));
+#endif
+		}
+		return ReturnFunction;
+	}
 	UFunction* Z_Construct_UFunction_ATouchSpectatorCapture_RayCastWorld()
 	{
 		struct TouchSpectatorCapture_eventRayCastWorld_Parms
@@ -214,6 +233,7 @@ void EmptyLinkFunctionForGeneratedCodeTouchSpectatorCapture() {}
 				OuterClass->LinkChild(Z_Construct_UFunction_ATouchSpectatorCapture_CheckIfTouchedWidgetCustom());
 				OuterClass->LinkChild(Z_Construct_UFunction_ATouchSpectatorCapture_CheckIfTouchedWidgetFromCamera());
 				OuterClass->LinkChild(Z_Construct_UFunction_ATouchSpectatorCapture_GetTouchedWidgetsFromCamera());
+				OuterClass->LinkChild(Z_Construct_UFunction_ATouchSpectatorCapture_KillTouchFeedback());
 				OuterClass->LinkChild(Z_Construct_UFunction_ATouchSpectatorCapture_RayCastWorld());
 				OuterClass->LinkChild(Z_Construct_UFunction_ATouchSpectatorCapture_ScreenToWorld());
 
@@ -226,6 +246,7 @@ void EmptyLinkFunctionForGeneratedCodeTouchSpectatorCapture() {}
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_ATouchSpectatorCapture_CheckIfTouchedWidgetCustom(), "CheckIfTouchedWidgetCustom"); // 754515594
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_ATouchSpectatorCapture_CheckIfTouchedWidgetFromCamera(), "CheckIfTouchedWidgetFromCamera"); // 2660583015
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_ATouchSpectatorCapture_GetTouchedWidgetsFromCamera(), "GetTouchedWidgetsFromCamera"); // 2400921557
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_ATouchSpectatorCapture_KillTouchFeedback(), "KillTouchFeedback"); // 4276966371
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_ATouchSpectatorCapture_RayCastWorld(), "RayCastWorld"); // 265947141
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_ATouchSpectatorCapture_ScreenToWorld(), "ScreenToWorld"); // 441618664
 				static TCppClassTypeInfo<TCppClassTypeTraits<ATouchSpectatorCapture> > StaticCppClassTypeInfo;
@@ -256,7 +277,7 @@ void EmptyLinkFunctionForGeneratedCodeTouchSpectatorCapture() {}
 		check(OuterClass->GetClass());
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ATouchSpectatorCapture, 4145975767);
+	IMPLEMENT_CLASS(ATouchSpectatorCapture, 1699613707);
 	static FCompiledInDefer Z_CompiledInDefer_UClass_ATouchSpectatorCapture(Z_Construct_UClass_ATouchSpectatorCapture, &ATouchSpectatorCapture::StaticClass, TEXT("/Script/EnversedTouch"), TEXT("ATouchSpectatorCapture"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(ATouchSpectatorCapture);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

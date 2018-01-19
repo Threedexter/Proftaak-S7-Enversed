@@ -6,9 +6,9 @@
 /NAME:"UE4Editor-EnversedTouch.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"F:\Program Files\UE4\UE_4.17\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.h.obj"
-"F:\School\S7\GPT7\Proftaak-S7-Enversed\BlackoutVR\Plugins\EnversedTouch\Intermediate\Build\Win64\UE4Editor\Development\EnversedTouch\Module.EnversedTouch.cpp.obj"
-"F:\School\S7\GPT7\Proftaak-S7-Enversed\BlackoutVR\Plugins\EnversedTouch\Intermediate\Build\Win64\UE4Editor\Development\EnversedTouch\Module.EnversedTouch.gen.cpp.obj"
-"F:\Program Files\UE4\UE_4.17\Engine\Intermediate\Build\Win64\UE4Editor\Development\EnversedTouch\PCLaunch.rc.res"
-"F:\Program Files\UE4\UE_4.17\Engine\Intermediate\Build\Win64\UE4Editor\Development\ModuleVersionResource.rc.inl.res"
-/OUT:"F:\School\S7\GPT7\Proftaak-S7-Enversed\BlackoutVR\Plugins\EnversedTouch\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-EnversedTouch.lib"
+"C:\Program Files\Epic Games\UE_4.17\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.h.obj"
+"C:\Users\eNVERS\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\EnversedTouch\Intermediate\Build\Win64\UE4Editor\Development\EnversedTouch\Module.EnversedTouch.cpp.obj"
+"C:\Users\eNVERS\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\EnversedTouch\Intermediate\Build\Win64\UE4Editor\Development\EnversedTouch\Module.EnversedTouch.gen.cpp.obj"
+"C:\Program Files\Epic Games\UE_4.17\Engine\Intermediate\Build\Win64\UE4Editor\Development\EnversedTouch\PCLaunch.rc.res"
+"C:\Program Files\Epic Games\UE_4.17\Engine\Intermediate\Build\Win64\UE4Editor\Development\ModuleVersionResource.rc.inl.res"
+/OUT:"C:\Users\eNVERS\Documents\Github\Proftaak-S7-Enversed\BlackoutVR\Plugins\EnversedTouch\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-EnversedTouch.lib"

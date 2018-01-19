@@ -7,10 +7,11 @@
 #include "TouchActorInterface.h"
 #include "Components/BoxComponent.h"
 #include "ExampleScore.h"
+#include "GameFramework/Character.h"
 #include "TouchPlayerPawn.generated.h"
 
 UCLASS()
-class ENVERSEDTOUCH_API ATouchPlayerPawn : public APawn, public ITouchActorInterface, public IExampleScore
+class ENVERSEDTOUCH_API ATouchPlayerPawn : public ACharacter, public ITouchActorInterface, public IExampleScore
 {
 	GENERATED_BODY()
 

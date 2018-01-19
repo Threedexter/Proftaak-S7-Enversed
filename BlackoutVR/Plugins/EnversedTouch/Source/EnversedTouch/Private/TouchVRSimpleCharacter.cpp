@@ -7,7 +7,10 @@
 
 void ATouchVRSimpleCharacter::BeginPlay()
 {
+	Super::BeginPlay();
+
 	onTouchActorUpdate.AddDynamic(this, &ATouchVRSimpleCharacter::MoveTouchActor);
+	onTouchActorEnd.AddDynamic(this, &ATouchVRSimpleCharacter::StopMoveTouchActor);
 }
 
 bool ATouchVRSimpleCharacter::CheckIfTouchedActorOnEnter(ETouchIndex::Type fingerIndex, FVector2D touchScreenLocation,
@@ -17,7 +20,7 @@ bool ATouchVRSimpleCharacter::CheckIfTouchedActorOnEnter(ETouchIndex::Type finge
 
 	AActor* actor;
 	float length;
-	if(Super::CheckIfTouchedActorOnEnter(fingerIndex, touchScreenLocation, hit))
+	if (Super::CheckIfTouchedActorOnEnter(fingerIndex, touchScreenLocation, hit))
 	{
 		return true;
 	}
@@ -57,12 +60,13 @@ FVector2D ATouchVRSimpleCharacter::GetTouchLocation_Implementation(int playerID)
 
 	for (FTouchFinger touchStruct : touchStructs)
 	{
-		if (touchStruct.touchedActor)
+		if (touchStruct.touchedActor && touchStruct.touchedActor->Implements<UTouchActorInterface>()) {
 			if (playerID == ITouchActorInterface::Execute_GetTouchActorID(touchStruct.touchedActor))
 			{
 				touched = &touchStruct;
 				break;
 			}
+		}
 	}
 	// if touched
 	if (touched)
@@ -135,6 +139,16 @@ AActor* ATouchVRSimpleCharacter::GetNearestActor(FVector worldLocation, float& l
 
 void ATouchVRSimpleCharacter::MoveTouchActor(AActor* touchActor, FVector worldHitPosition)
 {
-	ITouchActorInterface::Execute_SetMoveActorLocation(touchActor, worldHitPosition);
+	if (gameStarted && touchActor->Implements<UTouchActorInterface>()) {
+		ITouchActorInterface::Execute_SetMoveActorLocation(touchActor, worldHitPosition);
+	}
+}
+
+void ATouchVRSimpleCharacter::StopMoveTouchActor(AActor* touchActor, FVector worldHitPosition)
+{
+	if(touchActor->Implements<UTouchActorInterface>())
+	{
+		ITouchActorInterface::Execute_StopActorMovement(touchActor);
+	}
 }
 #pragma optimize("", on)

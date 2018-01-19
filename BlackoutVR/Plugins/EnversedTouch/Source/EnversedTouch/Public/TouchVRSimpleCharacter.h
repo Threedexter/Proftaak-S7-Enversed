@@ -48,7 +48,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Touch|World")
 		AActor* GetNearestActor(FVector worldLocation, float& length);
 	
-	void MoveTouchActor(AActor* touchActor, FVector worldHitPosition);
+	UFUNCTION(BlueprintCallable, Category = "Touch|Movement")
+		void MoveTouchActor(AActor* touchActor, FVector worldHitPosition);
+
+	UFUNCTION(BlueprintCallable, Category = "Touch|Movement")
+		void StopMoveTouchActor(AActor* touchActor, FVector worldHitPosition);
 
 	//interface methods
 	virtual FVector2D GetTouchLocation_Implementation(int playerID) override;

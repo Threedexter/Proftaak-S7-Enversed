@@ -19,6 +19,14 @@ struct FVector;
 
 #define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchSpectatorCapture_h_17_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execKillTouchFeedback) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->KillTouchFeedback(); \
+		P_NATIVE_END; \
+	} \
+ \
 	DECLARE_FUNCTION(execGetTouchedWidgetsFromCamera) \
 	{ \
 		P_GET_STRUCT(FVector2D,Z_Param_touchPosition); \
@@ -80,6 +88,14 @@ struct FVector;
 
 
 #define BlackoutVR_Plugins_EnversedTouch_Source_EnversedTouch_Public_TouchSpectatorCapture_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execKillTouchFeedback) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->KillTouchFeedback(); \
+		P_NATIVE_END; \
+	} \
  \
 	DECLARE_FUNCTION(execGetTouchedWidgetsFromCamera) \
 	{ \

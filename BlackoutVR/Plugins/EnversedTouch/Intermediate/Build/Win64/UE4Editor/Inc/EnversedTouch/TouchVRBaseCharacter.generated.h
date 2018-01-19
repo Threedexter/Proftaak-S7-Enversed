@@ -27,7 +27,7 @@ struct _Script_EnversedTouch_eventEndTouchWidget_Parms \
 	TArray<UWidgetWrapper*> widgets; \
 	bool hitWidget; \
 }; \
-static inline void FEndTouchWidget_DelegateWrapper(const FMulticastScriptDelegate& EndTouchWidget, FVector2D touchWidgetLocation, FHitResult touchWorldHit, const TArray<UWidgetWrapper*>& widgets, bool hitWidget) \
+static inline void FEndTouchWidget_DelegateWrapper(const FMulticastScriptDelegate& EndTouchWidget, FVector2D touchWidgetLocation, FHitResult touchWorldHit, TArray<UWidgetWrapper*> const& widgets, bool hitWidget) \
 { \
 	_Script_EnversedTouch_eventEndTouchWidget_Parms Parms; \
 	Parms.touchWidgetLocation=touchWidgetLocation; \
@@ -46,7 +46,7 @@ struct _Script_EnversedTouch_eventUpdateTouchWidget_Parms \
 	TArray<UWidgetWrapper*> widgets; \
 	bool hitWidget; \
 }; \
-static inline void FUpdateTouchWidget_DelegateWrapper(const FMulticastScriptDelegate& UpdateTouchWidget, FVector2D touchWidgetLocation, FHitResult touchWorldHit, const TArray<UWidgetWrapper*>& widgets, bool hitWidget) \
+static inline void FUpdateTouchWidget_DelegateWrapper(const FMulticastScriptDelegate& UpdateTouchWidget, FVector2D touchWidgetLocation, FHitResult touchWorldHit, TArray<UWidgetWrapper*> const& widgets, bool hitWidget) \
 { \
 	_Script_EnversedTouch_eventUpdateTouchWidget_Parms Parms; \
 	Parms.touchWidgetLocation=touchWidgetLocation; \
@@ -65,7 +65,7 @@ struct _Script_EnversedTouch_eventBeginTouchWidget_Parms \
 	TArray<UWidgetWrapper*> widgets; \
 	bool hitWidget; \
 }; \
-static inline void FBeginTouchWidget_DelegateWrapper(const FMulticastScriptDelegate& BeginTouchWidget, FVector2D touchWidgetLocation, FHitResult touchWorldHit, const TArray<UWidgetWrapper*>& widgets, bool hitWidget) \
+static inline void FBeginTouchWidget_DelegateWrapper(const FMulticastScriptDelegate& BeginTouchWidget, FVector2D touchWidgetLocation, FHitResult touchWorldHit, TArray<UWidgetWrapper*> const& widgets, bool hitWidget) \
 { \
 	_Script_EnversedTouch_eventBeginTouchWidget_Parms Parms; \
 	Parms.touchWidgetLocation=touchWidgetLocation; \
