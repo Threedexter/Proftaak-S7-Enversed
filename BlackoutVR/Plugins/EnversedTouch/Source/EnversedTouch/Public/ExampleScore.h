@@ -2,7 +2,9 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
+#include "UObject/ObjectMacros.h"
+#include "UObject/ScriptMacros.h"
+#include "UObject/Interface.h"
 #include "ExampleScore.generated.h"
 
 // This class does not need to be modified.

@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
 #include "ModuleManager.h"
 
 class FEnversedTouchModule : public IModuleInterface
