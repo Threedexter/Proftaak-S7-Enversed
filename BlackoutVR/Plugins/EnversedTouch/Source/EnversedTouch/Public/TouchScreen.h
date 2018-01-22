@@ -2,8 +2,7 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
-#include <windows.h>
+#include "Vector2D.h"
 
 /**
  * A class that is used to get the screen size of the game using the windows api.
@@ -16,6 +15,5 @@ public:
 	~TouchScreen();
 
 private:
-	LRESULT WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 	void KillTouch();
 };

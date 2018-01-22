@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include "InputCoreTypes.h"
 #include "CoreMinimal.h"
+#include "InputCoreTypes.h"
 #include "FTouchFinger.generated.h"
 
 /**

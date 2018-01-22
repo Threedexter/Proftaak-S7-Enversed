@@ -60,6 +60,6 @@ public class EnversedTouch : ModuleRules
 
 
         Definitions.Add("WINVER=0x0A00");
-        Definitions.Add("_WIN32_WINNT_WINBLUE=0x0A00");
+        Definitions.Add("_WIN32_WINNT_WIN10=0x0A00");
     }
 }

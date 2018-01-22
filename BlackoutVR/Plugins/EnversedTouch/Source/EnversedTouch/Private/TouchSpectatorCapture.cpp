@@ -4,10 +4,10 @@
 #include "SceneView.h"
 #include "Components/SceneCaptureComponent2D.h"
 #include "SceneManagement.h"
-#include "TouchScreen.h"
 #include "WidgetWrapper.h"
 #include "Runtime/Renderer/Private/ScenePrivate.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "TouchScreen.h"
 
 
 ATouchSpectatorCapture::ATouchSpectatorCapture(const FObjectInitializer& ObjectInitializer)
